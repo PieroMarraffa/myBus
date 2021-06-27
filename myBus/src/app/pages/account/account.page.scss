@@ -1,0 +1,45 @@
+.icon-box{
+  text-align: center;
+  font-size: 75px;
+  padding: 10px ;
+  height: 110px;
+}
+
+.info-box{
+  text-align: center;
+}
+
+h4{
+  margin: 0px;
+}
+
+#change-photo{
+  position: relative;
+  display: block;
+  top: -30px;
+  left: 40px;
+  margin: auto;
+  color: black;
+  max-width: fit-content;
+}
+
+#profile-icon{
+  border: 2px solid grey;
+  border-radius: 100px;
+}
+
+.buttons{
+  display: flex;
+  padding-top: 80px;
+}
+
+ .buttons ion-button{
+   width: 50%;
+   transition: 0.5s;
+   border-radius: 25px;
+ }
+
+ .buttons ion-button:hover{
+   background-color: #3880ff;
+   color: white;
+ }

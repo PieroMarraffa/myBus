@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button (click)="onSettings()" fill="clear" slot="end">
+      <ion-icon slot="icon-only" name="settings" color="dark"></ion-icon>
+    </ion-button>
+    <ion-title slot="start">Account</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="box">
+    <div class="icon-box">
+      <ion-icon name="person" id="profile-icon"></ion-icon>
+      <ion-button fill="clear" id="change-photo">
+        <ion-icon name="pencil-outline"></ion-icon>
+      </ion-button>
+    </div>
+    <div class="info-box">
+      <h4>Gabriele Giusti</h4>
+    </div>
+    <div>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle color="primary">email:</ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>gabriele.giusti@student.univaq.it</ion-card-content>
+      </ion-card>
+    </div>
+
+    <div class="buttons">
+      <ion-button fill="outline" shape="round" (click)="toPreferences()">Preferiti</ion-button>
+      <ion-button fill="outline" shape="round" (click)="toTickets()">Tickets</ion-button>
+    </div>
+  </div>
+</ion-content>

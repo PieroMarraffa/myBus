@@ -11,10 +11,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
   {
-    path: 'bus-list',
-    loadChildren: () => import('./pages/bus-list/bus-list.module').then( m => m.BusListPageModule)
-  },
-  {
     path: 'map',
     loadChildren: () => import('./pages/map/map.module').then( m => m.MapPageModule)
   },
@@ -37,7 +33,21 @@ const routes: Routes = [
   {
     path: 'tickets',
     loadChildren: () => import('./pages/tickets/tickets.module').then( m => m.TicketsPageModule)
-  }
+  },
+  {
+    path: 'tabs/busList',
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./pages/bus-list/bus-list.module').then( m => m.BusListPageModule)
+      },
+      {
+        path: ":busId",
+        loadChildren: () => import('./pages/bus-list/bus-detail/bus-detail.module').then( m => m.BusDetailPageModule)
+      }
+    ]
+  },
+
 ];
 @NgModule({
   imports: [

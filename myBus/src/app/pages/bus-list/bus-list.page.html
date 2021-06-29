@@ -1,9 +1,21 @@
-<ion-header>
+<ion-header color="primary">
   <ion-toolbar>
-    <ion-title>busList</ion-title>
+    <ion-title>Bus List</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  
+  <ion-card [routerLink]="['./', Bus.id]" *ngFor="let Bus of busList">
+    <ion-item>
+      <ion-icon name="bus-outline" slot="start"></ion-icon>
+      <ion-label>{{ Bus.nome }}</ion-label>
+      <ion-button fill="outline" slot="end">View</ion-button>
+    </ion-item>
+  
+    <ion-card-content>
+      {{ Bus.percorso }}
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

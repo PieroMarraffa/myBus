@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { BusListService } from './bus-list.service';
+import { Bus } from './bus.model';
+
 
 @Component({
   selector: 'app-bus-list',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BusListPage implements OnInit {
 
-  constructor() { }
+  busList: Bus[];
+
+  constructor(private BusListServices: BusListService){}
 
   ngOnInit() {
+    this.busList = this.BusListServices.getAllBus();
   }
-
+  
 }

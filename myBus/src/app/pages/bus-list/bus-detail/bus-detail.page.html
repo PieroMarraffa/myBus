@@ -8,5 +8,22 @@
 </ion-header>
 
 <ion-content>
-  <h2>bello</h2>
+  <ion-card *ngFor="let Stop of LoadedStop; let TimeTable of LoadedTimeTable">
+    <ion-card-header>
+      <ion-item>
+        <ion-icon name="bus-outline" slot="start"></ion-icon>
+        <ion-label slot="end" color="primary">{{ Stop.nome }}</ion-label>
+      </ion-item>
+    </ion-card-header>
+    <ion-card-content>
+      {{ TimeTable }}
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngFor="let Stop of LoadedStop; let TimeTable of LoadedTimeTable">
+      <!--<ion-icon name="bus-outline" slot="start"></ion-icon>-->
+    <ion-card-title> ciao {{ Stop.nome }}</ion-card-title>
+    <ion-card-content>
+      {{ TimeTable }}
+    </ion-card-content>
+  </ion-card>
 </ion-content>

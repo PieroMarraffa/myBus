@@ -1,9 +1,31 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>login</ion-title>
+    <ion-title>Login</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <form [formGroup]="credentialForm">
+    <ion-item>
+      <ion-input
+      placeholder="Email"
+      formControlName="email"
+      clearInput="true"></ion-input>
+    </ion-item>
+    <div *ngIf="(email.dirty || email.touched) && email.errors" class="errors">
+      <span *ngIf="email.errors?.required">Email richeista</span>
+      <span *ngIf="email.errors?.email">Email non valida</span>
+    </div>
 
+    <ion-item>
+      <ion-input
+      placeholder="password"
+      type="password"
+      formControlName="password"
+      clearInput="true"></ion-input>
+    </ion-item>
+  </form>
+
+  <ion-button (click)="signIn()" expand="full">Login</ion-button>
+  <ion-button (click)="toRegister()" expand="full">Register</ion-button>
 </ion-content>

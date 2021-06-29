@@ -15,8 +15,17 @@ const routes: Routes = [
     loadChildren: () => import('./pages/map/map.module').then( m => m.MapPageModule)
   },
   {
-    path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
+    path: 'tabs/home',
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
+      },
+      {
+        path: ":newsId",
+        loadChildren: () => import('./pages/home/news-detail/news-detail.module').then( m => m.NewsDetailPageModule)
+      }
+    ]
   },
   {
     path: 'account',

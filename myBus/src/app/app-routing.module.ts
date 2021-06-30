@@ -19,8 +19,17 @@ const routes: Routes = [
       ...canActivate(redirectLoggedInToHome)
   },
   {
-    path: 'bus-list',
-    loadChildren: () => import('./pages/bus-list/bus-list.module').then( m => m.BusListPageModule)
+    path: 'tabs/busList',
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./pages/bus-list/bus-list.module').then( m => m.BusListPageModule)
+      },
+      {
+        path: ':busId',
+        loadChildren: () => import('./pages/bus-list/bus-detail/bus-detail.module').then( m => m.BusDetailPageModule)
+      }
+    ]
   },
   {
     path: 'map',
@@ -52,7 +61,15 @@ const routes: Routes = [
   {
     path: 'registration',
     loadChildren: () => import('./pages/registration/registration.module').then(m => m.RegistrationPageModule)
+  },  {
+    path: 'paypal-mobile',
+    loadChildren: () => import('./paypal-mobile/paypal-mobile.module').then( m => m.PaypalMobilePageModule)
+  },
+  {
+    path: 'paypal-mobile',
+    loadChildren: () => import('./pages/paypal-mobile/paypal-mobile.module').then( m => m.PaypalMobilePageModule)
   }
+
 ];
 @NgModule({
   imports: [

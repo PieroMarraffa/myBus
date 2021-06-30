@@ -4,26 +4,23 @@
       <ion-back-button defaultHref="/bus-list"></ion-back-button>
     </ion-buttons>
     <ion-title>{{ LoadedBus.nome }}</ion-title>
+    <ion-button (click)="addPreferiti()" slot="end"><ion-icon name="star-outline"></ion-icon></ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let Stop of LoadedStop; let TimeTable of LoadedTimeTable">
-    <ion-card-header>
-      <ion-item>
-        <ion-icon name="bus-outline" slot="start"></ion-icon>
-        <ion-label slot="end" color="primary">{{ Stop.nome }}</ion-label>
-      </ion-item>
-    </ion-card-header>
+  <ion-card>
+    <ng-container *ngFor="let TimeTable of LoadedTimeTable; let Stop of LoadedStop">
+      <ion-card-header>
+        <ion-item>
+          <ion-icon name="bus-outline" slot="start"></ion-icon>
+          <ion-label>{{ Stop.nome }}</ion-label>
+        </ion-item>
+      </ion-card-header>
     <ion-card-content>
       {{ TimeTable }}
     </ion-card-content>
+    </ng-container>
   </ion-card>
-  <ion-card *ngFor="let Stop of LoadedStop; let TimeTable of LoadedTimeTable">
-      <!--<ion-icon name="bus-outline" slot="start"></ion-icon>-->
-    <ion-card-title> ciao {{ Stop.nome }}</ion-card-title>
-    <ion-card-content>
-      {{ TimeTable }}
-    </ion-card-content>
-  </ion-card>
+
 </ion-content>

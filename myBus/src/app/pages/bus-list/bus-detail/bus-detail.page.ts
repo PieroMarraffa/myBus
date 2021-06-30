@@ -22,7 +22,7 @@ export class BusDetailPage implements OnInit {
 
   ngOnInit() {
     this.stopList = this.stopListServices.getAllStop();
-    this.LoadedStop = this.stopListServices.getAllStop();
+    //this.LoadedStop = this.stopListServices.getAllStop();
     this.activetedRouter.paramMap.subscribe(paramMap => {
       if(!paramMap.has("busId")){
         //redirect
@@ -41,5 +41,9 @@ export class BusDetailPage implements OnInit {
       this.LoadedStop = x;
       this.LoadedTimeTable = z;
   };
+
+  addPreferiti(){
+    console.log(this.LoadedBus);
+  }
 
 }

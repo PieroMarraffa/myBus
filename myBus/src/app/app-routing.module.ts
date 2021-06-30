@@ -1,5 +1,12 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { canActivate, redirectLoggedInTo, redirectUnauthorizedTo} from "@angular/fire/auth-guard";
+
+const redirectUnauthorizedToLogin = () =>
+  redirectUnauthorizedTo(['/login']);
+
+const redirectLoggedInToHome = () =>
+  redirectLoggedInTo(['/tabs']);
 
 const routes: Routes = [
   {
@@ -8,7 +15,8 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
+      ...canActivate(redirectLoggedInToHome)
   },
   {
     path: 'bus-list',
@@ -24,7 +32,8 @@ const routes: Routes = [
   },
   {
     path: 'account',
-    loadChildren: () => import('./pages/account/account.module').then( m => m.AccountPageModule)
+    loadChildren: () => import('./pages/account/account.module').then( m => m.AccountPageModule),
+    ...canActivate(redirectUnauthorizedToLogin)
   },
   {
     path: 'settings',
@@ -32,11 +41,17 @@ const routes: Routes = [
   },
   {
     path: 'preferences',
-    loadChildren: () => import('./pages/preferences/preferences.module').then( m => m.PreferencesPageModule)
+    loadChildren: () => import('./pages/preferences/preferences.module').then( m => m.PreferencesPageModule),
+    ...canActivate(redirectUnauthorizedToLogin)
   },
   {
     path: 'tickets',
-    loadChildren: () => import('./pages/tickets/tickets.module').then( m => m.TicketsPageModule)
+    loadChildren: () => import('./pages/tickets/tickets.module').then( m => m.TicketsPageModule),
+    ...canActivate(redirectUnauthorizedToLogin)
+  },
+  {
+    path: 'registration',
+    loadChildren: () => import('./pages/registration/registration.module').then(m => m.RegistrationPageModule)
   }
 ];
 @NgModule({

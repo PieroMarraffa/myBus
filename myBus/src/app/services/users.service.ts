@@ -12,7 +12,7 @@ export interface User{
 })
 export class UsersService {
 
-  currentUser: User;
+  currentUser: User = null;
 
   constructor(private afs:AngularFirestore, private afAuth: AngularFireAuth) {
     this.afAuth.onAuthStateChanged(user => {

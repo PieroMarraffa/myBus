@@ -8,6 +8,21 @@
   <ion-list>
 
     <form [formGroup]="credentialForm">
+
+      <ion-item>
+        <ion-input
+          placeholder="Nome"
+          formControlName="nome"
+          clearInput="true"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input
+          placeholder="Cognome"
+          formControlName="cognome"
+          clearInput="true"></ion-input>
+      </ion-item>
+
       <ion-item>
         <ion-input
           placeholder="Email"
@@ -35,6 +50,7 @@
         <ion-input
           placeholder="Confirm Password"
           type="password"
+          formControlName="cpassword"
           clearInput="true"
         ></ion-input>
       </ion-item>

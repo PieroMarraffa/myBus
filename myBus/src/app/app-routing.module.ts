@@ -19,8 +19,18 @@ const routes: Routes = [
       ...canActivate(redirectLoggedInToHome)
   },
   {
-    path: 'bus-list',
-    loadChildren: () => import('./pages/bus-list/bus-list.module').then( m => m.BusListPageModule)
+    path: 'tabs/bus-list',
+    children:[
+      {
+      path: "",
+      loadChildren: () => import('./pages/bus-list/bus-list.module').then( m => m.BusListPageModule)
+    },
+      {
+        path: ":busId",
+        loadChildren: () => import('./pages/bus-list/bus-detail/bus-detail.module').then( m => m.BusDetailPageModule)
+
+      }
+    ]
   },
   {
     path: 'map',

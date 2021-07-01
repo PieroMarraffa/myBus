@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LoadingController, NavController} from "@ionic/angular";
 import {UsersService} from "../../services/users.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-settings',
@@ -10,7 +11,8 @@ import {UsersService} from "../../services/users.service";
 export class SettingsPage implements OnInit {
 
   constructor(private navCotroller: NavController,
-              private usersService: UsersService){ }
+              private usersService: UsersService,
+              private router: Router){ }
 
   ngOnInit() {
   }
@@ -20,7 +22,9 @@ export class SettingsPage implements OnInit {
   }
 
   signOut(){
-    this.usersService.signOut();
-    this.navCotroller.navigateRoot('login');
+    this.usersService.signOut().then(() => {
+      this.router.navigateByUrl('/login', { replaceUrl: true })
+    });
+    //this.navCotroller.navigateRoot('login');
   }
 }

@@ -1,10 +1,15 @@
 import { Injectable } from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/firestore";
 import {AngularFireAuth, AngularFireAuthModule} from "@angular/fire/auth";
+import {AlertController, ToastController} from "@ionic/angular";
+import {Observable, of} from "rxjs";
+import { User } from "../models/user.model"
+import {switchMap} from "rxjs/operators";
 
-export interface User{
+export interface Users{
   uid: string;
   email: string;
+  displayName: string;
 }
 
 @Injectable({
@@ -12,29 +17,57 @@ export interface User{
 })
 export class UsersService {
 
-  currentUser: User = null;
+  uid: string;
+  credential: any;
+  currentUser: Users = null;
+  user$: Observable<User>;
 
-  constructor(private afs:AngularFirestore, private afAuth: AngularFireAuth) {
+  constructor(private afs:AngularFirestore,
+              private afAuth: AngularFireAuth) {
     this.afAuth.onAuthStateChanged(user => {
       console.log('Changed: ', user);
       this.currentUser = user;
     })
+    this.user$ = this.afAuth.authState
+      .pipe(
+        switchMap(user => {
+          if (user){
+            return this.afs.doc<User>(`profiles/${this.currentUser.uid}`).valueChanges();
+          } else {
+            return of(null);
+          }
+        })
+      )
   }
 
-  async signUp({ email, password, cpassword }){
-    const credential = await this.afAuth.createUserWithEmailAndPassword(
+  getUid(){
+    return this.currentUser.uid;
+  }
+
+  getCurrentUser(){
+    return this.afs.doc(`profiles/${this.currentUser.uid}`).get();
+  }
+
+  getUsers(){
+    return this.afs.collection('profiles').valueChanges({idField: 'uid'}) as Observable<User[]>;
+  }
+
+  async signUp({ email, password, nome, cognome }) {
+
+    this.credential = await this.afAuth.createUserWithEmailAndPassword(
       email,
       password
     );
 
-
-    const uid = credential.user.uid;
+    this.uid = this.credential.user.uid;
 
     return this.afs.doc(
-      `profiles/${uid}`
+      `profiles/${this.uid}`
     ).set({
-      uid,
-      email: credential.user.email,
+      uid: this.uid,
+      email: this.credential.user.email,
+      name: nome,
+      surame: cognome,
     })
   }
 
@@ -45,6 +78,5 @@ export class UsersService {
   signOut(){
     return this.afAuth.signOut();
   }
-
 
 }

@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from "@angular/fire/auth";
-import firebase from 'firebase/app';
 import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/firestore";
 import {UsersService} from "../../services/users.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {AlertController, LoadingController, NavController} from "@ionic/angular";
+import {AlertController, LoadingController, NavController, ToastController} from "@ionic/angular";
 
 @Component({
   selector: 'app-registration',
@@ -21,13 +19,16 @@ export class RegistrationPage implements OnInit {
               private alertController: AlertController,
               private loadingController: LoadingController,
               private usersService: UsersService,
-              private navController: NavController) {
+              private toaster: ToastController) {
   }
 
   ngOnInit() {
     this.credentialForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
+      cpassword: ['', Validators.required],
+      nome: ['', Validators.required],
+      cognome: ['', Validators.required],
     });
   }
 
@@ -35,19 +36,26 @@ export class RegistrationPage implements OnInit {
     const loading = await this.loadingController.create();
     await loading.present();
 
-    this.usersService.signUp(this.credentialForm.value).then(user => {
-      loading.dismiss();
-      this.router.navigateByUrl('/tabs', { replaceUrl: true });
-    }, async err => {
-      loading.dismiss();
-      const alert = await this.alertController.create({
-        header: 'Registrazione non effettuata',
-        message: err.message,
-        buttons: ['OK']
-      });
+    console.log(this.credentialForm.value)
+    if (this.credentialForm.get('password').value == this.credentialForm.get('cpassword').value) {
+      this.usersService.signUp(this.credentialForm.value).then(user => {
+        loading.dismiss();
+        this.router.navigateByUrl('/tabs', {replaceUrl: true});
+      }, async err => {
+        loading.dismiss();
+        const alert = await this.alertController.create({
+          header: 'Registrazione non effettuata',
+          message: err.message,
+          buttons: ['OK']
+        });
 
-      await alert.present();
-    });
+        await alert.present();
+      });
+    } else {
+      loading.dismiss();
+      this.toast('Passwords non combacianti!!', 'danger');
+      this.router.navigateByUrl('/registration', {replaceUrl: true});
+    }
   }
 
   get email(){
@@ -56,5 +64,17 @@ export class RegistrationPage implements OnInit {
 
   get password(){
     return this.credentialForm.get('password');
+  }
+
+  async toast(message, status){
+    const toast = await this.toaster.create({
+      message: message,
+      color: status,
+      position: 'bottom',
+      duration: 1500
+    });
+
+    toast.present();
+
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { BusListService } from './bus-list.service';
-import { Bus } from './bus.model';
+import { BusListService } from '../../services/bus-list.service';
+import { Bus } from '../../models/bus.model';
+import {Observable} from "rxjs";
 
 
 @Component({
@@ -10,12 +11,14 @@ import { Bus } from './bus.model';
 })
 export class BusListPage implements OnInit {
 
-  busList: Bus[];
+  busList: any;
 
-  constructor(private BusListServices: BusListService){}
+  constructor(private busListServices: BusListService){}
 
   ngOnInit() {
-    this.busList = this.BusListServices.getAllBus();
+    this.busListServices.bus$.subscribe(bus => {
+      this.busList = bus;
+    })
   }
-  
+
 }

@@ -15,7 +15,7 @@ export class MapPage {
   mapOptions: any;
   mapCenter = { lat: null, lng: null };
   infoWindows: any[];
-  markers: any=[{
+  markers: any =[{
     title: "casetta",
     latitudine:"10",
     longitudine:"11"},
@@ -45,8 +45,8 @@ export class MapPage {
       let mapMarker= new google.maps.Marker({
         position: position,
         title: marker.title,
-        latitudine: marker.latitudine,
-        longitudine: marker.longitudine,
+        latitude: marker.latitudine,
+        longitude: marker.longitudine,
 
       })
 
@@ -67,8 +67,6 @@ export class MapPage {
     infoWindow.open(this.map,marker);
   })
     this.infoWindows.push(infoWindow);
-
-
   }
   closeAllInfoWindow(){
     for(let window of this.infoWindows){

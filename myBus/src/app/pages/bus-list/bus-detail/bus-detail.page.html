@@ -10,11 +10,11 @@
 
 <ion-content>
   <ion-card>
-    <ng-container *ngFor="let TimeTable of LoadedTimeTable; let Stop of LoadedStop">
+    <ng-container *ngFor="let Stop of LoadedStop; let TimeTable of LoadedTimeTable">
       <ion-card-header>
         <ion-item>
           <ion-icon name="bus-outline" slot="start"></ion-icon>
-          <ion-label>{{ Stop.nome }}</ion-label>
+          <ion-label>{{ Stop }}</ion-label>
         </ion-item>
       </ion-card-header>
     <ion-card-content>

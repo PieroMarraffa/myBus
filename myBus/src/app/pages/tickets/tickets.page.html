@@ -1,12 +1,31 @@
-<ion-header >
+<ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot = "start">
-      <ion-back-button defaultHref="/tabs/account"></ion-back-button>
+      <ion-back-button defaultHref="/account"></ion-back-button>
     </ion-buttons>
-    <ion-title><b>Tickets</b></ion-title>
+    <ion-title>
+      Buying tickets
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-card class="welcome-card">
+    <!--<ion-img src="/assets/paypal.jpg"></ion-img>-->
+    <ion-card-header>
+      <ion-item><ion-card-title>PayPal </ion-card-title>
+        <ion-icon slot="end" name="ticket-outline"></ion-icon></ion-item>
+      <ion-row>
+        <ion-col>
+          Total Payment
+        </ion-col>
+        <ion-col>
+          {{currencyIcon}}{{paymentAmount}}
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+    <ion-card-content>
+      <div id="paypal-button-container"></div>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

@@ -9,7 +9,7 @@ export class NewsService {
   private newses: News[] = [
     {
       id: "1",
-      title: "gatto sull'autobus",
+      title: "Gatto sull'autobus",
       description: "il gatto è bello",
       data:"15/02/2021",
       imageUrl:"https://www.ilmiogattoeleggenda.it/wp-content/uploads/2019/05/gatto-che-prende-mezzi-pubblici.jpg"

@@ -28,8 +28,8 @@ export class MapPage {
     });
 
     this.geolocation.getCurrentPosition().then((resp) => {
-      this.mapCenter.lat = resp.coords.latitude;
-      this.mapCenter.lng = resp.coords.longitude;
+      this.mapCenter.lat = 42.34467;
+      this.mapCenter.lng = 13.40131;
       this.mapOptions = {
         zoom: 15,
         center: this.mapCenter

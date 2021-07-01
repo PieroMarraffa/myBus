@@ -1,10 +1,10 @@
-<ion-header >
+<ion-header color="primary">
   <ion-toolbar color="primary">
     <ion-title><b>Bus List</b></ion-title>
-      <ion-button [routerLink]="['/settings']" fill="clear" slot="end">
-        <ion-icon slot="icon-only" name="settings" color="light"></ion-icon>
-      </ion-button>
-    </ion-toolbar>
+    <ion-button [routerLink]="['/settings']" fill="clear" slot="end">
+      <ion-icon slot="icon-only" name="settings" color="light"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
@@ -13,12 +13,7 @@
     <ion-item>
       <ion-icon name="bus-outline" slot="start"></ion-icon>
       <ion-label>{{ Bus.nome }}</ion-label>
-      <ion-button fill="outline" slot="end">View</ion-button>
     </ion-item>
-
-    <ion-card-content>
-      {{ Bus.percorso }}
-    </ion-card-content>
   </ion-card>
 
 </ion-content>

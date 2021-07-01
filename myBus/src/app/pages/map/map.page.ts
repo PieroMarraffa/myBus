@@ -17,8 +17,8 @@ export class MapPage {
   infoWindows: any[];
   markers: any =[{
     title: "casetta",
-    latitudine:"10",
-    longitudine:"11"},
+    latitudine:"42.34467",
+    longitudine:"13.40131"},
     ];
 
   constructor(private geolocation: Geolocation) {
@@ -58,13 +58,14 @@ export class MapPage {
   addInfoWindowMarker(marker){
     let infoWindowMarker = "<div id='content'>" +
       "<h2 id='firstHeading' class='firstHeading'>" + marker.title + "</h2>"
-                              +"<h2>" + marker.latitudine+ "</h2></div>";
+                              +"<h2>" + "ciao" + marker.latitudine + "</h2></div>";
     let infoWindow = new google.maps.InfoWindow({
-      content: infoWindowMarker
+      content: infoWindowMarker,
+      maxWidth: 400
     });
-    marker.addListener('click', () => {
-    this.closeAllInfoWindow();
-    infoWindow.open(this.map,marker);
+    marker.addEventListener('click', () => {
+      this.closeAllInfoWindow();
+    infoWindow.open(this.map);
   })
     this.infoWindows.push(infoWindow);
   }

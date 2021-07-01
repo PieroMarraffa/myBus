@@ -12,10 +12,10 @@ export class BusListPage implements OnInit {
 
   busList: Bus[];
 
-  constructor(private BuListServices: BusListService){}
+  constructor(private BusListServices: BusListService){}
 
   ngOnInit() {
-    this.busList = this.BuListServices.getAllBus();
+    this.busList = this.BusListServices.getAllBus();
   }
   
 }

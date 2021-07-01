@@ -1,9 +1,9 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-button (click)="onSettings()" fill="clear" slot="end">
-      <ion-icon slot="icon-only" name="settings" color="dark"></ion-icon>
+  <ion-toolbar color="primary">
+    <ion-button [routerLink]="['/settings']" fill="clear" slot="end">
+      <ion-icon slot="icon-only" name="settings" color="light"></ion-icon>
     </ion-button>
-    <ion-title slot="start">Account</ion-title>
+    <ion-title slot="start"><b>Account</b></ion-title>
   </ion-toolbar>
 </ion-header>
 

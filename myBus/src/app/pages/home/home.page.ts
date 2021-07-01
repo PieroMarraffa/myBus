@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {NavController} from "@ionic/angular";
+import {News} from './news.model';
+import {NewsService} from './news.service';
 
 @Component({
   selector: 'app-home',
@@ -7,13 +8,12 @@ import {NavController} from "@ionic/angular";
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
+  newses: News[];
 
-  constructor(private navController: NavController) { }
+  constructor(private newsService: NewsService) { }
 
   ngOnInit() {
+    this.newses=this.newsService.getAllNews();
   }
 
-  onSettings() {
-    this.navController.navigateRoot('settings')
-  }
 }

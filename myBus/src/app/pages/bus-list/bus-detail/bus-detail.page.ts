@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BusListService } from '../../../services/bus-list.service';
-import { Bus } from '../../../models/bus.model';
-import { StopListService } from '../../../services/stop-list.service';
-import { Stop } from '../../../models/stop.model';
+import { BusListService } from '../bus-list.service';
+import { Bus } from '../bus.model';
+import { StopListService } from '../stop-list.service';
+import { Stop } from '../stop.model';
 
 @Component({
   selector: 'app-bus-detail',
@@ -35,9 +35,12 @@ export class BusDetailPage implements OnInit {
       var x = [];
       var z = [];
       for (let i = 0; i < key.length; i++){
-        x.push(this.stopListServices.getStop(key[i]).nome);
+        let y = this.stopListServices.getStop(key[i]);
+        x.push(y.nome);
         z.push(this.LoadedBus.percorso[key[i]]);
+        console.log(x);
       }
+
       this.LoadedStop = x;
       this.LoadedTimeTable = z;
   };

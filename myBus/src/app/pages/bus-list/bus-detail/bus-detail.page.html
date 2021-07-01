@@ -1,16 +1,17 @@
 <ion-header>
-  <ion-toolbar>
+    <ion-toolbar color="primary">
+      <ion-title><b>Bus detail</b></ion-title>
     <ion-buttons slot = "start">
       <ion-back-button defaultHref="/bus-list"></ion-back-button>
     </ion-buttons>
     <ion-title>{{ LoadedBus.nome }}</ion-title>
-    <ion-button (click)="addPreferiti()" slot="end"><ion-icon name="star-outline"></ion-icon></ion-button>
+    <ion-button (click)="addPreferiti()" slot="end" color="light"><ion-icon name="star-outline"></ion-icon></ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-card>
-    <ng-container *ngFor="let TimeTable of LoadedTimeTable; let Stop of LoadedStop">
+    <ng-container *ngFor=" let Stop of LoadedStop; index as i">
       <ion-card-header>
         <ion-item>
           <ion-icon name="bus-outline" slot="start"></ion-icon>
@@ -18,7 +19,7 @@
         </ion-item>
       </ion-card-header>
     <ion-card-content>
-      {{ TimeTable }}
+      {{ LoadedTimeTable[i] }}
     </ion-card-content>
     </ng-container>
   </ion-card>

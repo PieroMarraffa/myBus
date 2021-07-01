@@ -1,17 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { MapPage} from "./map.page";
+import {Geolocation} from "@ionic-native/geolocation/ngx";
 
-import { MapPage } from './map.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: MapPage
-  }
+    component: MapPage,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
+  providers: [Geolocation],
 })
 export class MapPageRoutingModule {}

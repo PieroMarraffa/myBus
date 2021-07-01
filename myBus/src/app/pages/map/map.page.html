@@ -1,9 +1,12 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>map</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title><b>Map</b></ion-title>
+    <ion-button [routerLink]="['/settings']" fill="clear" slot="end">
+      <ion-icon slot="icon-only" name="settings" color="light"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+    <div #map id="map"></div>
 </ion-content>

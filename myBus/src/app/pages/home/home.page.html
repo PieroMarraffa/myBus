@@ -1,12 +1,20 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-button (click)="onSettings()" fill="clear" slot="end">
-      <ion-icon slot="icon-only" name="settings" color="dark"></ion-icon>
+  <ion-toolbar color="primary">
+    <ion-title><b>Home</b></ion-title>
+    <ion-button [routerLink]="['/settings']" fill="clear" slot="end">
+      <ion-icon slot="icon-only" name="settings" color="light"></ion-icon>
     </ion-button>
-    <ion-title slot="start">Home</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-list>
+    <ion-card [routerLink]="['./', news.id]" *ngFor="let news of newses" >
+      <ion-card-header>
+        <ion-img [src]="news.imageUrl" ></ion-img>
+      </ion-card-header>
+      <ion-card-title>{{news.title}}</ion-card-title>
+    </ion-card>
+  </ion-list>
 
 </ion-content>

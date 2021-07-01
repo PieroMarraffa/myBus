@@ -1,11 +1,14 @@
 <ion-header color="primary">
-  <ion-toolbar>
-    <ion-title>Bus List</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title><b>Bus List</b></ion-title>
+    <ion-button [routerLink]="['/settings']" fill="clear" slot="end">
+      <ion-icon slot="icon-only" name="settings" color="light"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  
+
   <ion-card [routerLink]="['./', Bus.id]" *ngFor="let Bus of busList">
     <ion-item>
       <ion-icon name="bus-outline" slot="start"></ion-icon>

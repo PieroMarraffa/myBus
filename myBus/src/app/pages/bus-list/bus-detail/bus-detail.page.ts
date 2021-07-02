@@ -12,6 +12,7 @@ import { Stop } from '../stop.model';
 })
 export class BusDetailPage implements OnInit {
   LoadedBus: Bus;
+  Preferences: Bus[];
   stopList: Stop[];
   LoadedStop: string[];
   LoadedTimeTable: string[];
@@ -21,6 +22,7 @@ export class BusDetailPage implements OnInit {
               private stopListServices: StopListService) { }
 
   ngOnInit() {
+
     this.stopList = this.stopListServices.getAllStop();
     //this.LoadedStop = this.stopListServices.getAllStop();
     this.activetedRouter.paramMap.subscribe(paramMap => {
@@ -47,6 +49,7 @@ export class BusDetailPage implements OnInit {
 
   addPreferiti(){
     console.log(this.LoadedBus);
+
   }
 
 }

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BusListService } from '../bus-list.service';
-import { Bus } from '../bus.model';
+import { Bus } from '../../../models/bus.model';
 import { StopListService } from '../stop-list.service';
-import { Stop } from '../stop.model';
+import { Stop } from '../../../models/stop.model';
 
 @Component({
   selector: 'app-bus-detail',

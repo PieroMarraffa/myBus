@@ -16,8 +16,9 @@ export class BusListPage implements OnInit {
   constructor(private busListServices: BusListService){}
 
   ngOnInit() {
-    this.busListServices.bus$.subscribe(bus => {
+    this.busListServices.buses$.subscribe(bus => {
       this.busList = bus;
+      console.log(this.busList);
     })
   }
 

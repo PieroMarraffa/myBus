@@ -19,7 +19,7 @@ const routes: Routes = [
       ...canActivate(redirectLoggedInToHome)
   },
   {
-    path: 'tabs/bus-list',
+    path: 'tabs/busList',
     children:[
       {
       path: "",

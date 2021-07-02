@@ -12,7 +12,7 @@
   <ion-card [routerLink]="['./', Bus.id]" *ngFor="let Bus of busList">
     <ion-item>
       <ion-icon name="bus-outline" slot="start"></ion-icon>
-      <ion-label>{{ Bus.nome }}</ion-label>
+      <ion-label>{{ Bus?.nome }}</ion-label>
     </ion-item>
   </ion-card>
 

@@ -42,7 +42,7 @@
           clearInput="true"></ion-input>
       </ion-item>
       <div *ngIf="(password.dirty || password.touched) && password.errors" class="errors">
-        <span *ngIf="password.errors?.required">Password richeista</span>
+        <span *ngIf="password.errors?.required">Password richista</span>
         <span *ngIf="password.errors?.minlength">La password deve avere almeno 6 caratteri</span>
       </div>
 
@@ -59,6 +59,6 @@
 
   </ion-list>
 
-  <ion-button fill="solid" expand="block" color="dark" (click)="signUp()">Register</ion-button>
+  <ion-button fill="solid" expand="block" (click)="signUp()">Register</ion-button>
 </ion-content>
 

@@ -1,41 +1,34 @@
 import { Injectable } from '@angular/core';
 import { Stop } from '../models/stop.model';
+import {Observable, of} from "rxjs";
+import {AngularFirestore} from "@angular/fire/firestore";
+import {switchMap} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
 })
 export class StopListService {
 
-  constructor() { }
+  stop$: Observable<Stop[]>
 
-  private stopList: Stop[] = [
-    {
-    id: "1",
-    nome: "terminal",
-    latitudine: 214516516,
-    longitudine: 818161619,
-    },
-    {
-    id: "2",
-    nome: "collemaggio",
-    latitudine: 214516516,
-    longitudine: 818161619,
-    },
-    {
-    id: "3",
-    nome: "roio",
-    latitudine: 214516516,
-    longitudine: 818161619,
-    }
-  ]
+  constructor(private afs: AngularFirestore) {
+    this.stop$ = this.getAllStop().pipe(
+      switchMap(stop => {
+        if (stop){
+          return this.afs.collection<Stop>('stop').valueChanges();
+        } else {
+          return of(null);
+        }
+      })
+    )
+  }
+
   getAllStop(){
-    return[...this.stopList];
+    return this.afs.collection('stop').valueChanges() as Observable<Stop[]>;
   }
 
   getStop(stopId: string){
-    return {...this.stopList.find(Stop => {
-      return Stop.id === stopId;
-    })};
+    return this.afs.collection('stop', ref => ref.where('id','==', stopId)).valueChanges();
   }
 
 }

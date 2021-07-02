@@ -1,10 +1,9 @@
 <ion-header>
     <ion-toolbar color="primary">
-      <ion-title><b>Bus detail</b></ion-title>
     <ion-buttons slot = "start">
-      <ion-back-button defaultHref="/bus-list"></ion-back-button>
+      <ion-back-button defaultHref="/tabs/busList"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{ LoadedBus.nome }}</ion-title>
+    <ion-title>{{ loadedBus$?.nome }}</ion-title>
     <ion-button (click)="addPreferiti()" slot="end" color="light"><ion-icon name="star-outline"></ion-icon></ion-button>
   </ion-toolbar>
 </ion-header>

@@ -56,7 +56,7 @@ export class MapPage implements OnInit {
       let mapMarker= new google.maps.Marker({
         map: this.map,
         position: position,
-        title: marker.title,
+        title: marker[0],
       })
 
 
@@ -72,7 +72,7 @@ export class MapPage implements OnInit {
       this.mapCenter.lat = 42.34467;
       this.mapCenter.lng = 13.40131;
       this.mapOptions = {
-        zoom: 10,
+        zoom: 15,
         center: this.mapCenter
       }
       this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapOptions);

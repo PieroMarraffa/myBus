@@ -85,15 +85,16 @@ export class MapPage implements OnInit {
     let contentString = ( '<div id="content">' +
       '<div id="siteNotice">' +
       "</div>" +
-      '<h1 id="firstHeading" class="firstHeading"><b> marker[0] </b></h1>' + "</div>" +
+      '<h1 id="firstHeading" class="firstHeading"><b>' +  marker.title + ' </b></h1>' + "</div>" +
       "</div>")
     const infowindow = new google.maps.InfoWindow({
       content: contentString,
     });
+    console.log(marker[0]);
     google.maps.event.addListener(marker, "click", (function(marker) {
       return function() {
         var content = marker.getTitle();
-        infowindow.setContent(content);
+        infowindow.setContent(contentString);
         infowindow.open(this.map, marker);
       }
     })(marker));

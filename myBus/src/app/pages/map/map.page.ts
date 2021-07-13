@@ -1,7 +1,8 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { StopListService } from "../../services/stop-list.service";
-import {NavController} from "@ionic/angular";
+import {NavController, NavParams} from "@ionic/angular";
+
 
 declare var google;
 
@@ -48,18 +49,17 @@ export class MapPage implements OnInit {
     }
   }
 
-
   addMarker(){
     for(let marker of this.markers){
       let position= new google.maps.LatLng(marker[1],marker[2]);
-      console.log(marker);
+
       let mapMarker= new google.maps.Marker({
         map: this.map,
         position: position,
         title: marker[0],
       })
-
-
+      console.log(mapMarker);
+      this.addInfoWindow(mapMarker);
     }
   }
   loadMap(){
@@ -81,8 +81,24 @@ export class MapPage implements OnInit {
     });
 
   }
+  addInfoWindow(marker){
+    let contentString = ( '<div id="content">' +
+      '<div id="siteNotice">' +
+      "</div>" +
+      '<h1 id="firstHeading" class="firstHeading"><b> marker[0] </b></h1>' + "</div>" +
+      "</div>")
+    const infowindow = new google.maps.InfoWindow({
+      content: contentString,
+    });
+    google.maps.event.addListener(marker, "click", (function(marker) {
+      return function() {
+        var content = marker.getTitle();
+        infowindow.setContent(content);
+        infowindow.open(this.map, marker);
+      }
+    })(marker));
 
-
+  }
 
 }
 

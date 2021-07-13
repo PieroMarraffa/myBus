@@ -12,8 +12,13 @@
     <ion-card [routerLink]="['./', news.id]" *ngFor="let news of newses" >
       <ion-card-header>
         <ion-img [src]="news.imageUrl" ></ion-img>
+        <ion-card-subtitle>{{news.data}}</ion-card-subtitle>
+        <ion-card-title>{{news.title}}</ion-card-title>
       </ion-card-header>
-      <ion-card-title>{{news.title}}</ion-card-title>
+      <ion-card-content>
+        {{news.description}}
+      </ion-card-content>
+
     </ion-card>
   </ion-list>
 

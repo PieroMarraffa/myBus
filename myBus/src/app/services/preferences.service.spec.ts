@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { StopListService } from './stop-list.service';
+import { PreferencesService } from './preferences.service';
 
-describe('StopListService', () => {
-  let service: StopListService;
+describe('PreferencesService', () => {
+  let service: PreferencesService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(StopListService);
+    service = TestBed.inject(PreferencesService);
   });
 
   it('should be created', () => {

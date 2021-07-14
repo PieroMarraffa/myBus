@@ -4,9 +4,13 @@ import { Bus } from "../../../models/bus.model";
 import {Stop} from "../../../models/stop.model";
 import {BusListService} from "../../../services/bus-list.service";
 import {StopListService} from "../../../services/stop-list.service";
-import {AngularFirestore} from "@angular/fire/firestore";
+import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/firestore";
 import {switchMap} from "rxjs/operators";
 import {of} from "rxjs";
+import {UsersService} from "../../../services/users.service";
+import {User} from "../../../models/user.model";
+import {element} from "protractor";
+import {PreferencesService} from "../../../services/preferences.service";
 
 @Component({
   selector: 'app-bus-detail',
@@ -16,6 +20,7 @@ import {of} from "rxjs";
 export class BusDetailPage implements OnInit {
   loadedBus: any;
   stopList: any;
+  user: User;
   stopList$: Stop;
   loadedBus$: Bus;
   LoadedStop: string[];
@@ -24,16 +29,21 @@ export class BusDetailPage implements OnInit {
   constructor(private activetedRouter: ActivatedRoute,
               private busListServices: BusListService,
               private stopListServices: StopListService,
-              private afs: AngularFirestore) { }
+              private afs: AngularFirestore,
+              private userService: UsersService,
+              private preferencesService: PreferencesService) {}
 
   ngOnInit() {
     console.log("Eccomi");
+    this.preferencesService.getPreferences().subscribe(result => {
+      console.log(result);
+    });
+
     this.stopListServices.stop$.subscribe(stop => {
       this.stopList = stop;
       console.log(this.stopList)
     });
 
-    //this.LoadedStop = this.stopListServices.getAllStop();
     this.activetedRouter.paramMap.subscribe(paramMap => {
       if (!paramMap.has("busId")) {
         //redirect
@@ -57,11 +67,9 @@ export class BusDetailPage implements OnInit {
         var key = (Object.keys(this.loadedBus$.percorso) as Array<string>);
         var x = [];
         var z = [];
-        console.log(key);
         for (let i = 0; i < key.length; i++){
           this.stopListServices.getStop(key[i]).pipe(
             switchMap( stop => {
-              console.log(stop);
               if (stop){
                 return this.afs.collection<Stop>('stop', ref => ref.where('id', '==', key[i])).valueChanges();
               }
@@ -69,12 +77,9 @@ export class BusDetailPage implements OnInit {
           ).subscribe( stop => {
             this.stopList = stop;
             this.stopList$ = this.stopList[0];
-            console.log(this.stopList);
             x.push(this.stopList[0].nome);
             z.push(this.loadedBus[0].percorso[key[i]]);
           });
-
-          console.log(x);
         }
 
         this.LoadedStop = x;
@@ -83,9 +88,20 @@ export class BusDetailPage implements OnInit {
       })
     }
 
-
-  addPreferiti(){
-    //console.log(this.loadedBus);
+  async addPreferiti(){
+      await this.userService.user$.subscribe(user => {
+      this.user = user;
+      console.log(this.user);
+      if (this.user.preferences == null || this.user.preferences.length == 0){
+        this.user.preferences = [];
+        this.user.preferences.push(this.loadedBus$.id);
+      }else if (this.user.preferences.find(element => element != this.loadedBus$.id)){
+        this.user.preferences.push(this.loadedBus$.id);
+      }
+      return  this.afs.doc(`profiles/${this.user.uid}`).update({
+        preferences: this.user.preferences,
+      })
+    })
   }
 
 }

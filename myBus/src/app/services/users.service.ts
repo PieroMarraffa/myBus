@@ -20,6 +20,7 @@ export class UsersService {
   credential: any;
   currentUser: Users = null;
   user$: Observable<User>;
+  preferences = [];
 
   constructor(private afs:AngularFirestore,
               private afAuth: AngularFireAuth) {
@@ -66,7 +67,8 @@ export class UsersService {
       uid: this.uid,
       email: this.credential.user.email,
       name: nome,
-      surame: cognome,
+      surname: cognome,
+      preferences: this.preferences,
     })
   }
 

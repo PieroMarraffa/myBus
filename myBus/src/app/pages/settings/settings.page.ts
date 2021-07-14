@@ -25,6 +25,5 @@ export class SettingsPage implements OnInit {
     this.usersService.signOut().then(() => {
       this.router.navigateByUrl('/login', { replaceUrl: true })
     });
-    //this.navCotroller.navigateRoot('login');
   }
 }

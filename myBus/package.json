@@ -89,7 +89,6 @@
       "cordova-sqlite-storage": {},
       "cordova-plugin-firebase": {}
     },
-    "cordova-sqlite-storage": {},
     "cordova-plugin-whitelist": {},
     "cordova-plugin-statusbar": {},
     "cordova-plugin-device": {},
@@ -98,25 +97,11 @@
       "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
     },
     "cordova-plugin-ionic-keyboard": {},
-    "cordova-plugin-nativegeocoder": {}
+    "cordova-plugin-nativegeocoder": {},
+    "com.paypal.cordova.mobilesdk": {}
   },
   "platforms": [
-    "android"
+    "android",
+    "ios"
   ]
-      "cordova-plugin-whitelist": {},
-      "cordova-plugin-statusbar": {},
-      "cordova-plugin-device": {},
-      "cordova-plugin-splashscreen": {},
-      "cordova-plugin-ionic-webview": {
-        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
-      },
-      "cordova-plugin-ionic-keyboard": {},
-      "cordova-plugin-nativegeocoder": {},
-      "com.paypal.cordova.mobilesdk": {}
-    },
-    "platforms": [
-      "android",
-      "ios"
-    ]
-  }
 }

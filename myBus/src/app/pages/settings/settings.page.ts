@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {LoadingController, NavController} from "@ionic/angular";
 import {UsersService} from "../../services/users.service";
 import {Router} from "@angular/router";
-import {NavController} from "@ionic/angular";
 import{ ActionSheetController} from "@ionic/angular";
 
 @Component({

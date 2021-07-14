@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import{AlertController} from "@ionic/angular";
 
 @Component({
   selector: 'app-tickets',
@@ -9,7 +10,7 @@ export class TicketsPage {
   paymentAmount: string = '1.20';
   currency: string = 'USD';
   currencyIcon: string = '$';
-  constructor() {
+  constructor(private alertController: AlertController) {
     let _this = this;
     setTimeout(() => {
       // Render the PayPal button into #paypal-button-container
@@ -27,11 +28,19 @@ export class TicketsPage {
         },
 
         // Finalize the transaction
+
         onApprove: function (data, actions) {
-          return actions.order.capture()
-            .then(function (details) {
+          return actions.order.capture().then(function (details) {
               // Show a success message to the buyer
-              alert('Transaction completed by ' + details.payer.name.given_name + '!');
+              console.log(details);
+            let lenght=4;
+            var result           = '';
+            var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            var charactersLength = characters.length;
+            for ( var i = 0; i < 10; i++ ) {
+              result += characters.charAt(Math.floor(Math.random() *
+                charactersLength));}
+              alert("questo è il codice: "+ result);
             })
             .catch(err => {
               console.log(err);
@@ -39,5 +48,38 @@ export class TicketsPage {
         }
       }).render('#paypal-button-container');
     }, 500)
+
+
   }
+
+  generateCode() {
+    let lenght=10;
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() *
+        charactersLength));
+    }
+    return result;
+  }
+
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      header: "Ticket's code" ,
+      message: 'Transaction completed by ' + 'details.payer.name.given_name' + '! \n'
+      + 'il tuo codice è: '+ this.generateCode(),
+      buttons: [
+         {
+          text: 'Okay',
+          handler: () => {
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
 }

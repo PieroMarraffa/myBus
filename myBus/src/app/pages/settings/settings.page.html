@@ -3,6 +3,7 @@
     <ion-buttons slot = "start">
       <ion-back-button defaultHref="/tabs/account"></ion-back-button>
     </ion-buttons>
+
     <ion-title slot="start"><b>Settings</b></ion-title>
   </ion-toolbar>
 </ion-header>
@@ -11,6 +12,8 @@
   <ion-item>
     <ion-label>
       <ion-button expand="full" (click)="signOut()">Log Out</ion-button>
+      <ion-button fill="outline" shape="round" expand="full">Cambia credenziali</ion-button>
+      <ion-button fill="outline" shape="round" (click)="presentActionSheet()" expand="full">Selezona lingua</ion-button>
     </ion-label>
   </ion-item>
 </ion-content>

@@ -3,3 +3,4 @@ export interface Bus{
     nome: string;
     percorso: Record<string, string[]>;
 }
+

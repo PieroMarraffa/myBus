@@ -7,6 +7,8 @@ import {StopListService} from "../../../services/stop-list.service";
 import {AngularFirestore} from "@angular/fire/firestore";
 import {switchMap} from "rxjs/operators";
 import {of} from "rxjs";
+import {PreferencesService} from "../../../services/preferences.service";
+import {NavController, ToastController} from "@ionic/angular";
 
 @Component({
   selector: 'app-bus-detail',
@@ -24,16 +26,16 @@ export class BusDetailPage implements OnInit {
   constructor(private activetedRouter: ActivatedRoute,
               private busListServices: BusListService,
               private stopListServices: StopListService,
-              private afs: AngularFirestore) { }
+              private afs: AngularFirestore,
+              private preferenceService: PreferencesService,
+              private toastController: ToastController,
+              private navController: NavController) { }
 
   ngOnInit() {
-    console.log("Eccomi");
     this.stopListServices.stop$.subscribe(stop => {
       this.stopList = stop;
-      console.log(this.stopList)
     });
 
-    //this.LoadedStop = this.stopListServices.getAllStop();
     this.activetedRouter.paramMap.subscribe(paramMap => {
       if (!paramMap.has("busId")) {
         //redirect
@@ -52,16 +54,12 @@ export class BusDetailPage implements OnInit {
       ).subscribe(async bus => {
         this.loadedBus = bus;
         this.loadedBus$ = this.loadedBus[0];
-        console.log("cicca" + "iapalla");
-        console.log(this.loadedBus[0].percorso);
         var key = (Object.keys(this.loadedBus$.percorso) as Array<string>);
         var x = [];
         var z = [];
-        console.log(key);
         for (let i = 0; i < key.length; i++){
           this.stopListServices.getStop(key[i]).pipe(
             switchMap( stop => {
-              console.log(stop);
               if (stop){
                 return this.afs.collection<Stop>('stop', ref => ref.where('id', '==', key[i])).valueChanges();
               }
@@ -69,12 +67,9 @@ export class BusDetailPage implements OnInit {
           ).subscribe( stop => {
             this.stopList = stop;
             this.stopList$ = this.stopList[0];
-            console.log(this.stopList);
             x.push(this.stopList[0].nome);
             z.push(this.loadedBus[0].percorso[key[i]]);
           });
-
-          console.log(x);
         }
 
         this.LoadedStop = x;
@@ -84,8 +79,10 @@ export class BusDetailPage implements OnInit {
     }
 
 
-  addPreferiti(){
-    //console.log(this.loadedBus);
+  addToPreferences(bus){
+    this.preferenceService.addToPreferences(bus);
+    this.navController.navigateRoot('preferences');
   }
+
 
 }

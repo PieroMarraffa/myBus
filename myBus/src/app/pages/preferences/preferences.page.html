@@ -8,5 +8,21 @@
 </ion-header>
 
 <ion-content>
+  <div *ngIf="isEmptyPreferences">
+    <div>
+      <p>
+        Non hai preferenze
+      </p>
+    </div>
+  </div>
 
+  <div *ngIf="!isEmptyPreferences">
+
+    <ion-card [routerLink]="['../tabs/busList', item.id]" *ngFor="let item of preferenceItem">
+      <ion-item>
+        <ion-icon name="bus-outline" slot="start"></ion-icon>
+        <ion-label>{{ item?.nome }}</ion-label>
+      </ion-item>
+    </ion-card>
+  </div>
 </ion-content>

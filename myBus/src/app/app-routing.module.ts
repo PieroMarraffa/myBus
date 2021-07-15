@@ -33,8 +33,17 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'map',
-    loadChildren: () => import('./pages/map/map.module').then( m => m.MapPageModule)
+    path: '',
+    children:[
+      {
+        path: "map",
+        loadChildren: () => import('./pages/map/map.module').then( m => m.MapPageModule)
+      },
+      {
+        path: "bus-list/:busId",
+        loadChildren: () => import('./pages/bus-list/bus-detail/bus-detail.module').then( m => m.BusDetailPageModule)
+      }
+    ]
   },
   {
     path: 'tabs/home',

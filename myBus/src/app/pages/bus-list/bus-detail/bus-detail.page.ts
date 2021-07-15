@@ -71,7 +71,6 @@ export class BusDetailPage implements OnInit {
             z.push(this.loadedBus[0].percorso[key[i]]);
           });
         }
-
         this.LoadedStop = x;
         this.LoadedTimeTable = z;
       });

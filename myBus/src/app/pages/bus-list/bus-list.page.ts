@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { BusListService } from '../../services/bus-list.service';
-import { Bus } from '../../models/bus.model';
-import {Observable} from "rxjs";
-
 
 @Component({
   selector: 'app-bus-list',
@@ -18,7 +15,6 @@ export class BusListPage implements OnInit {
   ngOnInit() {
     this.busListServices.buses$.subscribe(bus => {
       this.busList = bus;
-      console.log(this.busList);
     })
   }
 

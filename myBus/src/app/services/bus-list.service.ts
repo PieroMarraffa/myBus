@@ -10,7 +10,7 @@ import {switchMap} from "rxjs/operators";
 export class BusListService {
 
   buses$: Observable<Bus[]>;
-  bus$:Observable<Bus>;
+  bus$: Observable<Bus>;
 
   constructor(private afs: AngularFirestore) {
     this.buses$ = this.getAllBus().pipe(

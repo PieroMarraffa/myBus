@@ -9,13 +9,13 @@
 
 <ion-content><ion-card>
   <ion-item>
-  <ion-img [src]="loadedNews.imageUrl">
-    <h2>{{loadedNews.title}}</h2>
+  <ion-img [src]="loadedNews$?.img">
+    <h2>{{loadedNews$?.titolo}}</h2>
   </ion-img>
   </ion-item>
   <ion-item>
-    <ion-title >{{loadedNews.title}}</ion-title>
+    <ion-title >{{loadedNews$?.titolo}}</ion-title>
   </ion-item>
-  <ion-textarea >{{loadedNews.description}}</ion-textarea>
+  <ion-textarea >{{loadedNews$?.descrizione}}</ion-textarea>
 </ion-card>
 </ion-content>

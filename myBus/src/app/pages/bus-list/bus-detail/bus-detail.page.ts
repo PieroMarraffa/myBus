@@ -27,10 +27,8 @@ export class BusDetailPage implements OnInit {
               private afs: AngularFirestore) { }
 
   ngOnInit() {
-    console.log("Eccomi");
     this.stopListServices.stop$.subscribe(stop => {
       this.stopList = stop;
-      console.log(this.stopList)
     });
 
     //this.LoadedStop = this.stopListServices.getAllStop();
@@ -52,16 +50,12 @@ export class BusDetailPage implements OnInit {
       ).subscribe(async bus => {
         this.loadedBus = bus;
         this.loadedBus$ = this.loadedBus[0];
-        console.log("cicca" + "iapalla");
-        console.log(this.loadedBus[0].percorso);
         var key = (Object.keys(this.loadedBus$.percorso) as Array<string>);
         var x = [];
         var z = [];
-        console.log(key);
         for (let i = 0; i < key.length; i++){
           this.stopListServices.getStop(key[i]).pipe(
             switchMap( stop => {
-              console.log(stop);
               if (stop){
                 return this.afs.collection<Stop>('stop', ref => ref.where('id', '==', key[i])).valueChanges();
               }
@@ -69,14 +63,10 @@ export class BusDetailPage implements OnInit {
           ).subscribe( stop => {
             this.stopList = stop;
             this.stopList$ = this.stopList[0];
-            console.log(this.stopList);
             x.push(this.stopList[0].nome);
             z.push(this.loadedBus[0].percorso[key[i]]);
           });
-
-          console.log(x);
         }
-
         this.LoadedStop = x;
         this.LoadedTimeTable = z;
       });

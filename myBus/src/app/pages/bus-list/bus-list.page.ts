@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BusListService } from '../../services/bus-list.service';
+import { ConnectivityService} from "../../services/connectivity.service";
+import {Bus} from "../../models/bus.model";
+import {Storage} from "@ionic/storage";
 
 @Component({
   selector: 'app-bus-list',
@@ -10,12 +13,41 @@ export class BusListPage implements OnInit {
 
   busList: any;
 
-  constructor(private busListServices: BusListService){}
+  constructor(private busListServices: BusListService,
+              private connectivityService: ConnectivityService,
+              private storage: Storage){}
 
   ngOnInit() {
-    this.busListServices.buses$.subscribe(bus => {
-      this.busList = bus;
+
+    this.connectivityService.appIsOnline$.subscribe(online => {
+
+      console.log(online);
+
+      if (online){
+        if (!this.busListServices.dataExist()) {
+          this.busListServices.buses$.subscribe(bus => {
+            this.busList = bus;
+            var storableBusList = [];
+            for (let busData of this.busList) {
+              storableBusList.push(busData)
+            }
+            this.busListServices.storeBusListData(storableBusList);
+          });
+        }else {
+          this.busListServices.getBusDataFromStorage().then(result => {
+            this.busList = result;
+          })
+        }
+      } else {
+        if (this.busListServices.dataExist()){
+          this.busListServices.getBusDataFromStorage().then(result => {
+            console.log(result);
+            this.busList = result;
+          });
+        }
+      }
     })
+
   }
 
 }

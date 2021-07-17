@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Storage} from "@ionic/storage";
-import {forEach} from "@angular-devkit/schematics";
+import {StorageService} from "./storage.service";
 
 const PREFERENCE_KEY = 'PREFERENCE_ITEM';
 
@@ -9,7 +9,8 @@ const PREFERENCE_KEY = 'PREFERENCE_ITEM';
 })
 export class PreferencesService {
 
-  constructor(private storage: Storage) { this.storage.create(); }
+  constructor(private storage: Storage, private storageService: StorageService) { //this.storage.create();
+     }
 
 
   addToPreferences(bus) {
@@ -17,12 +18,14 @@ export class PreferencesService {
       if (result) {
         if (!this.containsObject(bus, result)) {
           result.push(bus);
-          return this.storage.set(PREFERENCE_KEY, result);
+          //return this.storage.set(PREFERENCE_KEY, result);
+          return this.storageService.setData(PREFERENCE_KEY, result);
         } else {
           this.removeFromPreferences(bus);
         }
       } else {
-        return this.storage.set(PREFERENCE_KEY, [bus]);
+        //return this.storage.set(PREFERENCE_KEY, [bus]);
+        return this.storageService.setData(PREFERENCE_KEY, [bus]);
       }
     });
   }
@@ -31,17 +34,19 @@ export class PreferencesService {
     return this.getPreferencesItems().then(result => {
       if (result){
         var busIndex = this.returnIndexOf(result, bus);
-        console.log(busIndex);
-        console.log(result);
         result.splice(busIndex, 1);
-        console.log(result);
-        return this.storage.set(PREFERENCE_KEY, result);
+        //return this.storage.set(PREFERENCE_KEY, result);
+        return this.storageService.setData(PREFERENCE_KEY, result);
       }
     });
   }
 
   removeAllPreferenceItems(){
-    return this.storage.remove(PREFERENCE_KEY).then(res => {
+    /*return this.storage.remove(PREFERENCE_KEY).then(res => {
+      return res;
+    })
+     */
+    return this.storageService.removeData(PREFERENCE_KEY).then(res => {
       return res;
     })
   }
@@ -61,7 +66,8 @@ export class PreferencesService {
   }
 
   getPreferencesItems(){
-    return this.storage.get(PREFERENCE_KEY);
+    //return this.storage.get(PREFERENCE_KEY);
+    return this.storageService.getData(PREFERENCE_KEY);
   }
 
   returnIndexOf(array, item) : number{

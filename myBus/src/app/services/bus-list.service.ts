@@ -3,7 +3,7 @@ import { Bus } from '../models/bus.model';
 import {Observable, of} from "rxjs";
 import {AngularFirestore} from "@angular/fire/firestore";
 import {switchMap} from "rxjs/operators";
-import { Storage } from "@ionic/storage";
+import {StorageService} from "./storage.service";
 
 const BUS_LIST_KEY = 'BUS_LIST_KEY';
 
@@ -14,8 +14,7 @@ export class BusListService {
 
   buses$: Observable<Bus[]>;
 
-  constructor(private afs: AngularFirestore, private storage: Storage) {
-    this.storage.create();
+  constructor(private afs: AngularFirestore, private storageService: StorageService) {
     this.buses$ = this.getAllBus().pipe(
       switchMap(bus => {
         if (bus){
@@ -36,7 +35,7 @@ export class BusListService {
   }
 
   storeBusListData(bus){
-    return this.storage.set(BUS_LIST_KEY, bus);
+    return this.storageService.setData(BUS_LIST_KEY, bus);
   }
 
   containsObject(obj, list): boolean{
@@ -54,14 +53,14 @@ export class BusListService {
   }
 
   dataExist(): boolean{
-    if (this.storage.get(BUS_LIST_KEY)){
+    if (this.storageService.getData(BUS_LIST_KEY)){
       return true;
     }
     return false;
   }
 
   getBusDataFromStorage(){
-    return this.storage.get(BUS_LIST_KEY);
+    return this.storageService.getData(BUS_LIST_KEY)
   }
 }
 

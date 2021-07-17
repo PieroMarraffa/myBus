@@ -9,6 +9,7 @@ import {switchMap} from "rxjs/operators";
 import {of} from "rxjs";
 import {PreferencesService} from "../../../services/preferences.service";
 import {NavController, ToastController} from "@ionic/angular";
+import {ConnectivityService} from "../../../services/connectivity.service";
 
 @Component({
   selector: 'app-bus-detail',
@@ -29,7 +30,8 @@ export class BusDetailPage implements OnInit {
               private afs: AngularFirestore,
               private preferenceService: PreferencesService,
               private toastController: ToastController,
-              private navController: NavController) { }
+              private navController: NavController,
+              private connectivityService: ConnectivityService) { }
 
   ngOnInit() {
     this.stopListServices.stop$.subscribe(stop => {

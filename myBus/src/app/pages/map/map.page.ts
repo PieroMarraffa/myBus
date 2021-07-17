@@ -6,6 +6,7 @@ import { BusListService } from '../../services/bus-list.service';
 import {Bus} from "../../models/bus.model";
 import {BusListPage} from "../bus-list/bus-list.page";
 import {RouterLink} from "@angular/router";
+import { NgZone } from '@angular/core';
 
 
 declare var google;
@@ -23,13 +24,15 @@ export class MapPage implements OnInit {
   map: any;
   mapOptions: any;
   mapCenter = { lat: null, lng: null };
-  infoWindows: any[];
+  infoWindows:any=[];
   markers: any =[];
+  p: any=[];
 
   constructor(private geolocation: Geolocation,
               private stopListServices: StopListService,
               private busListServices:BusListService,
-              public navCtrl: NavController) {
+              public navCtrl: NavController,
+              private _ngZone:NgZone) {
 
 
   }
@@ -66,6 +69,7 @@ export class MapPage implements OnInit {
         title: marker[0],
         id: marker[3],
       })
+
       this.addInfoWindow(mapMarker);
     }
   }
@@ -88,40 +92,47 @@ export class MapPage implements OnInit {
     });
 
   }
-  goToBus(){
-   this.navCtrl.navigateRoot("");
-  }
+
+
   addInfoWindow(marker){
-    let fermata = this.getStoppino(marker.id);
-    let box: string;
-    console.log(fermata,marker.id);
+    let fermata = this.getStop(marker.id);
+    let box='';
     if(fermata!=false) {
-      let  cont=0;
+      let cont=0;
       for(let i of fermata){
-      let contentString = ('<ion-button  href="bus-list/Bus.Id">' +
-        '<h1 id="firstHeading" class="firstHeading">' + fermata[cont].nome + '</h1></ion-button>')
-      box = box + contentString;
-      cont ++;}
+      let contentString = ('<ion-button href= "tabs/busList/' + fermata[cont].id+ '">' +
+        '<h1 id="firstHeading" class="firstHeading">' + fermata[cont].nome + '</h1></ion-button>');
+      box= box  + contentString;
+      cont ++;
+      }
 
-      const infowindow = new google.maps.InfoWindow({
-
+      let infowindow = new google.maps.InfoWindow({
         content: box,
+        maxWidth: 200,
+        minWidth:200,
       });
-      google.maps.event.addListener(marker, "click", (function (marker) {
-        return function () {
-          infowindow.setContent(box);
+
+      google.maps.event.addListener(marker, "click",((marker)=> {
+
+        return function()  {
+
+          infowindow.setContent('<h1 align="center" id="firstHeading" class="firstHeading"><b>'+  marker.title +'</b></h1> \n' + box );
           infowindow.open(this.map, marker);
+
         }
       })(marker));
     }
   }
-  getStoppino(Stop){
+
+
+  getStop(Stop){
     let bus_per_fermata= [];
-    for( let bus of this.busList){
-      var key = (Object.keys(bus.percorso) as Array<string>);
+    console.log(this.busList);
+    for( let b of this.busList){
+      var key = (Object.keys(b.percorso) as Array<string>);
       for(let k of key){
         if (Stop == k) {
-          bus_per_fermata.push(bus);
+          bus_per_fermata.push(b);
         }
         }
       }
@@ -129,9 +140,6 @@ export class MapPage implements OnInit {
        return bus_per_fermata;}
     else{return false;}
   }
-
-
-
 }
 
 

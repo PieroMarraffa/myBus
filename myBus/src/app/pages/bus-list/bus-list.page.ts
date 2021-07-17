@@ -21,7 +21,7 @@ export class BusListPage implements OnInit {
       console.log(online);
 
       if (online){
-        if (!this.busListServices.dataExist()) {
+        if (this.busListServices.dataExist()) {
           this.busListServices.buses$.subscribe(bus => {
             this.busList = bus;
             var storableBusList = [];

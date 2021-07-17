@@ -12,8 +12,8 @@
     <ion-card [routerLink]="['./', news.id]" *ngFor="let news of newses">
       <ion-card-header>
         <ion-img [src]="news.img" ></ion-img>
-        <ion-card-subtitle>{{news?.data.toDate().getDate()}} {{news?.data.toDate().getMonth()}} {{news?.data.toDate().getFullYear()}}</ion-card-subtitle>
-        <ion-card-title>{{news?.titolo}}</ion-card-title>
+        <ion-card-subtitle>{{news?.data.toDate().getDate()}} / {{news?.data.toDate().getMonth()}} / {{news?.data.toDate().getFullYear()}}</ion-card-subtitle>
+        <ion-card-title ><b>{{news?.titolo}}</b></ion-card-title>
       </ion-card-header>
     </ion-card>
   </ion-list>

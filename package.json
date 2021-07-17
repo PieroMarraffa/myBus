@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@ionic/storage-angular": "^3.0.6",
+    "cordova-sqlite-storage": "^6.0.0"
+  }
+}

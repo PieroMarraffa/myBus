@@ -33,14 +33,14 @@ const routes: Routes = [
     ]
   },
   {
-    path: '',
+    path: 'map',
     children:[
       {
-        path: "map",
+        path: "",
         loadChildren: () => import('./pages/map/map.module').then( m => m.MapPageModule)
       },
       {
-        path: "bus-list/:busId",
+        path: ":busId",
         loadChildren: () => import('./pages/bus-list/bus-detail/bus-detail.module').then( m => m.BusDetailPageModule)
       }
     ]

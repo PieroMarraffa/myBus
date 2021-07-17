@@ -45,39 +45,74 @@ export class BusDetailPage implements OnInit {
       }
 
       const busId = paramMap.get("busId");
-      this.busListServices.getBus(busId).pipe(
-        switchMap( bus => {
-          if (bus) {
-            return this.afs.collection<Bus>('bus', ref => ref.where('id','==',busId)).valueChanges();
-          } else {
-            return of(null);
-          }
-        })
-      ).subscribe(async bus => {
-        this.loadedBus = bus;
-        this.loadedBus$ = this.loadedBus[0];
-        var key = (Object.keys(this.loadedBus$.percorso) as Array<string>);
-        var x = [];
-        var z = [];
-        for (let i = 0; i < key.length; i++){
-          this.stopListServices.getStop(key[i]).pipe(
-            switchMap( stop => {
-              if (stop){
-                return this.afs.collection<Stop>('stop', ref => ref.where('id', '==', key[i])).valueChanges();
+      this.connectivityService.appIsOnline$.subscribe(online => {
+
+        console.log(online);
+        if (online) {
+          this.busListServices.getBus(busId).pipe(
+            switchMap(bus => {
+              if (bus) {
+                return this.afs.collection<Bus>('bus', ref => ref.where('id', '==', busId)).valueChanges();
+              } else {
+                return of(null);
               }
             })
-          ).subscribe( stop => {
-            this.stopList = stop;
-            this.stopList$ = this.stopList[0];
-            x.push(this.stopList[0].nome);
-            z.push(this.loadedBus[0].percorso[key[i]]);
+          ).subscribe(async bus => {
+            this.loadedBus = bus;
+            this.loadedBus$ = this.loadedBus[0];
+            var key = (Object.keys(this.loadedBus$.percorso) as Array<string>);
+            var x = [];
+            var z = [];
+            for (let i = 0; i < key.length; i++) {
+              this.stopListServices.getStop(key[i]).pipe(
+                switchMap(stop => {
+                  if (stop) {
+                    return this.afs.collection<Stop>('stop', ref => ref.where('id', '==', key[i])).valueChanges();
+                  }
+                })
+              ).subscribe(stop => {
+                this.stopList = stop;
+                this.stopList$ = this.stopList[0];
+                x.push(this.stopList$.nome);
+                z.push(this.loadedBus$.percorso[key[i]]);
+              });
+            }
+            this.LoadedStop = x;
+            this.LoadedTimeTable = z;
           });
+
+          this.stopListServices.stop$.subscribe(stop => {
+            var storableStopData = [];
+            for (let stopData of stop){
+              storableStopData.push(stopData);
+            }
+            this.stopListServices.storeStopListData(storableStopData);
+          });
+        } else {
+          if (this.stopListServices.dataExist()){
+            this.stopListServices.getStopFromStorage().then(result => {
+              this.busListServices.getSingleBusFromStorage(busId).then(bus => {
+                this.loadedBus$ = bus;
+                var key = (Object.keys(this.loadedBus$.percorso) as Array<string>);
+                var x = [];
+                var z = [];
+                for (let i = 0; i < key.length; i++){
+                  this.stopListServices.getSingleStopFromStorage(key[i]).then(stop => {
+                    this.stopList = stop;
+                    x.push(this.stopList.nome);
+                    z.push(this.loadedBus$.percorso[key[i]]);
+                  });
+                }
+                this.LoadedStop = x;
+                this.LoadedTimeTable = z;
+              })
+            })
+          }
         }
-        this.LoadedStop = x;
-        this.LoadedTimeTable = z;
-      });
       })
-    }
+    })
+  }
+
 
 
   addToPreferences(bus){

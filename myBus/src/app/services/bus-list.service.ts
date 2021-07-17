@@ -63,5 +63,15 @@ export class BusListService {
   getBusDataFromStorage(){
     return this.storageService.getData(BUS_LIST_KEY)
   }
+
+  getSingleBusFromStorage(busId){
+    return this.getBusDataFromStorage().then(result => {
+      for (let i of result){
+        if (i.id == busId){
+          return i;
+        }
+      }
+    });
+  }
 }
 

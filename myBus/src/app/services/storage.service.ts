@@ -19,4 +19,12 @@ export class StorageService {
   removeData(key){
     return this.storage.remove(key);
   }
+
+  dataExist(key){
+    return this.storage.keys().then(result => {
+      if (result.indexOf(key) != null){
+        return true;
+      } else { return false; }
+    })
+  }
 }

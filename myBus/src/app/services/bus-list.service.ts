@@ -38,6 +38,10 @@ export class BusListService {
     return this.storageService.setData(BUS_LIST_KEY, bus);
   }
 
+  removeAllData(){
+    return this.storageService.removeData(BUS_LIST_KEY);
+  }
+
   containsObject(obj, list): boolean{
     if (!list.length || obj == null){
       return false;
@@ -52,11 +56,8 @@ export class BusListService {
     return false;
   }
 
-  dataExist(): boolean{
-    if (this.storageService.getData(BUS_LIST_KEY)){
-      return true;
-    }
-    return false;
+  dataExist(){
+    return this.storageService.dataExist(BUS_LIST_KEY);
   }
 
   getBusDataFromStorage(){

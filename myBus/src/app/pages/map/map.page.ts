@@ -24,7 +24,7 @@ export class MapPage implements OnInit {
   map: any;
   mapOptions: any;
   mapCenter = { lat: null, lng: null };
-  infoWindows:any=[];
+  infoWindow: any=[];
   markers: any =[];
   p: any=[];
 
@@ -112,18 +112,24 @@ export class MapPage implements OnInit {
         minWidth:200,
       });
 
-      google.maps.event.addListener(marker, "click",((marker)=> {
 
-        return function()  {
-
+      marker.addListener('click',()=> {
+          this.closeAllInfoWindow();
           infowindow.setContent('<h1 align="center" id="firstHeading" class="firstHeading"><b>'+  marker.title +'</b></h1> \n' + box );
           infowindow.open(this.map, marker);
 
-        }
-      })(marker));
+
+        })
+
+      this.infoWindow.push(infowindow);
+      console.log(this.infoWindow);
     }
   }
-
+  closeAllInfoWindow(){
+    for(let i of this.infoWindow){
+      i.close();
+    }
+  }
 
   getStop(Stop){
     let bus_per_fermata= [];

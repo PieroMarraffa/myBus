@@ -33,7 +33,7 @@ export class TicketsPage {
           return actions.order.capture().then(function (details) {
               // Show a success message to the buyer
               console.log(details);
-            let lenght=4;
+
             var result           = '';
             var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
             var charactersLength = characters.length;
@@ -41,7 +41,9 @@ export class TicketsPage {
               result += characters.charAt(Math.floor(Math.random() *
                 charactersLength));}
               alert("questo è il codice: "+ result);
+
             })
+
             .catch(err => {
               console.log(err);
             })
@@ -81,5 +83,20 @@ export class TicketsPage {
 
     await alert.present();
   }
+  async presentAlert(result) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Alert',
+      subHeader: 'Subtitle',
+      message: 'This is an alert message.' + result,
+      buttons: ['OK']
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+  }
+
 
 }

@@ -8,14 +8,13 @@ import{AlertController} from "@ionic/angular";
 })
 export class TicketsPage {
   paymentAmount: string = '1.20';
-  currency: string = 'USD';
-  currencyIcon: string = '$';
+  currency: string = 'EUR';
+  currencyIcon: string = '€';
   constructor(private alertController: AlertController) {
     let _this = this;
     setTimeout(() => {
       // Render the PayPal button into #paypal-button-container
       <any>window['paypal'].Buttons({
-
         // Set up the transaction
         createOrder: function (data, actions) {
           return actions.order.create({
@@ -33,7 +32,6 @@ export class TicketsPage {
           return actions.order.capture().then(function (details) {
               // Show a success message to the buyer
               console.log(details);
-
             var result           = '';
             var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
             var charactersLength = characters.length;

@@ -3,7 +3,7 @@
     <ion-button [routerLink]="['/settings']" fill="clear" slot="end">
       <ion-icon slot="icon-only" name="settings" color="light"></ion-icon>
     </ion-button>
-    <ion-title slot="start"><b>Account</b></ion-title>
+    <ion-title slot="start"><b>{{'Account.title' | translate}}</b></ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -29,8 +29,8 @@
     </div>
 
     <div class="buttons">
-      <ion-button fill="outline" shape="round" (click)="toPreferences()">Preferiti</ion-button>
-      <ion-button fill="outline" shape="round" (click)="toTickets()">Tickets</ion-button>
+      <ion-button fill="outline" shape="round" (click)="toPreferences()">{{'Account.prefe' | translate}}</ion-button>
+      <ion-button fill="outline" shape="round" (click)="toTickets()">{{'Account.tick' | translate}}</ion-button>
     </div>
   </div>
 </ion-content>

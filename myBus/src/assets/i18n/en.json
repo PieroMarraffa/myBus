@@ -24,6 +24,7 @@
     "name": "Name",
     "surname": "Surname",
     "email": "New Email",
+    "password": "New Password",
     "Riautenticati": "Riautenticate Yourself"
   },
   "Login": {
@@ -33,6 +34,23 @@
     "Password": "Insert Password",
     "ConfermaPassword": "Confirm Password",
     "Nome": "Name",
-    "Cognome": "Surname"
+    "Cognome": "Surname",
+    "Errore": "Couldn't Login",
+    "EmailNonValida": "Not Valid Email",
+    "EmailRichiesta": "Request Email"
+  },
+  "Registrati": {
+    "Nome": "Name",
+    "Cognome": "Surname",
+    "Email": "Email",
+    "EmailNonValida": "Not Valid Email",
+    "EmailRichiesta": "Request Email",
+    "PasswordRichiesta": "Request Password",
+    "Errore": "Password must have at least 6 character",
+    "ConfermaPassword": "Confirm Password",
+    "Registrati": "Registrate",
+    "Password": "Password",
+    "RegistrazioneNonEffettuata": "Cannot Registrate",
+    "PasswordNonCombacianti": "Different Passwords"
   }
 }

@@ -11,25 +11,25 @@
   <form [formGroup]="credentialForm">
     <ion-item>
       <ion-input
-      placeholder="Email"
+      placeholder="{{'Login.Email' | translate}}"
       formControlName="email"
       clearInput="true"></ion-input>
     </ion-item>
     <div *ngIf="(email.dirty || email.touched) && email.errors" class="errors">
-      <span *ngIf="email.errors?.required">Email richiesta</span>
-      <span *ngIf="email.errors?.email">Email non valida</span>
+      <span *ngIf="email.errors?.required">{{'Login.EmailRichiesta' | translate}}</span>
+      <span *ngIf="email.errors?.email">{{'Login.EmailNonValida' | translate}}</span>
     </div>
 
     <ion-item>
       <ion-input
-      placeholder="Password"
+      placeholder="{{'Login.Password' | translate}}"
       type="password"
       formControlName="password"
       clearInput="true"></ion-input>
     </ion-item>
   </form>
 <div class="buttons">
-  <ion-button (click)="signIn()" expand="full" fill="outline" shape="round">Login</ion-button>
-  <ion-button (click)="toRegister()" expand="full" fill="outline" shape="round">Register</ion-button>
+  <ion-button (click)="signIn()" expand="full" fill="outline" shape="round">{{'Login.Login' | translate}}</ion-button>
+  <ion-button (click)="toRegister()" expand="full" fill="outline" shape="round">{{'Login.Registrati' | translate}}</ion-button>
 </div>
 </ion-content>

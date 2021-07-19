@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ChangeCredentialsPageRoutingModule } from './change-credentials-routing.module';
 
 import { ChangeCredentialsPage } from './change-credentials.page';
+import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
     imports: [
@@ -14,7 +15,8 @@ import { ChangeCredentialsPage } from './change-credentials.page';
         FormsModule,
         IonicModule,
         ChangeCredentialsPageRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        TranslateModule
     ],
   declarations: [ChangeCredentialsPage]
 })

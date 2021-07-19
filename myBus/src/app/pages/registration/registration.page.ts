@@ -4,6 +4,7 @@ import {UsersService} from "../../services/users.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {AlertController, LoadingController, NavController, ToastController} from "@ionic/angular";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-registration',
@@ -19,7 +20,9 @@ export class RegistrationPage implements OnInit {
               private alertController: AlertController,
               private loadingController: LoadingController,
               private usersService: UsersService,
-              private toaster: ToastController) {
+              private toaster: ToastController,
+              private translateService: TranslateService
+  ) {
   }
 
   ngOnInit() {
@@ -36,7 +39,6 @@ export class RegistrationPage implements OnInit {
     const loading = await this.loadingController.create();
     await loading.present();
 
-    console.log(this.credentialForm.value)
     if (this.credentialForm.get('password').value == this.credentialForm.get('cpassword').value) {
       this.usersService.signUp(this.credentialForm.value).then(user => {
         loading.dismiss();
@@ -44,7 +46,7 @@ export class RegistrationPage implements OnInit {
       }, async err => {
         loading.dismiss();
         const alert = await this.alertController.create({
-          header: 'Registrazione non effettuata',
+          header: this.translateService.instant('Registrati.RegistrazioneNonEffettuata'),
           message: err.message,
           buttons: ['OK']
         });
@@ -53,7 +55,7 @@ export class RegistrationPage implements OnInit {
       });
     } else {
       loading.dismiss();
-      this.toast('Passwords non combacianti!!', 'danger');
+      this.toast(this.translateService.instant("Registrati.PasswordNonCombacianti"), 'danger');
       this.router.navigateByUrl('/registration', {replaceUrl: true});
     }
   }

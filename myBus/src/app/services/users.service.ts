@@ -4,6 +4,8 @@ import {AngularFireAuth, AngularFireAuthModule} from "@angular/fire/auth";
 import {Observable, of} from "rxjs";
 import { User } from "../models/user.model"
 import {switchMap} from "rxjs/operators";
+import firebase from "firebase";
+
 
 export interface Users{
   uid: string;
@@ -26,7 +28,7 @@ export class UsersService {
     this.afAuth.onAuthStateChanged(user => {
       console.log('Changed: ', user);
       this.currentUser = user;
-    })
+    });
     this.user$ = this.afAuth.authState
       .pipe(
         switchMap(user => {
@@ -58,6 +60,12 @@ export class UsersService {
       password
     );
 
+    const user = firebase.auth().currentUser;
+
+    user.updateProfile({
+      displayName: nome + ' ' + cognome
+    })
+
     this.uid = this.credential.user.uid;
 
     return this.afs.doc(
@@ -78,4 +86,55 @@ export class UsersService {
     return this.afAuth.signOut();
   }
 
+  async changeCredentials(displayName=null, email=null, password=null) {
+    const user = firebase.auth().currentUser;
+
+    if (displayName != null) {
+      user.updateProfile({
+        displayName: displayName,
+      }).then(() => {
+        this.afAuth.onAuthStateChanged(user => {
+          console.log('Changed: ', user);
+          this.currentUser = user;
+
+          var namSur = displayName.split(' ');
+
+          return this.afs.doc(`profiles/${user.uid}`).update({
+            name: namSur[0],
+            surame: namSur[1]
+          })
+        })
+      }).catch((error) => {
+        console.log(error);
+      });
+    }
+
+    if (email != null){
+      user.updateEmail(email).then(() => {
+        this.afAuth.onAuthStateChanged(user => {
+          console.log('Changed: ', user);
+          this.currentUser = user;
+
+          return this.afs.doc(`profiles/${user.uid}`).update({
+            email: email
+          });
+        });
+      }).catch((error) => {
+        console.log(error);
+      })
+    }
+
+    if (password != null){
+      user.updatePassword(password).then(() => {
+        this.afAuth.onAuthStateChanged(user => {
+          console.log('Changed: ', user);
+          this.currentUser = user;
+        })
+      }).catch((error) => {
+        console.log(error);
+      });
+    }
+
+
+  }
 }

@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>Register</ion-title>
+    <ion-buttons slot = "start">
+      <ion-back-button defaultHref="/login"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -36,7 +39,7 @@
 
       <ion-item>
         <ion-input
-          placeholder="password"
+          placeholder="Password"
           type="password"
           formControlName="password"
           clearInput="true"></ion-input>
@@ -59,6 +62,6 @@
 
   </ion-list>
 
-  <ion-button fill="solid" expand="block" (click)="signUp()">Register</ion-button>
+  <ion-button fill="outline" expand="full" shape="round" (click)="signUp()">Register</ion-button>
 </ion-content>
 

@@ -80,6 +80,15 @@ const routes: Routes = [
   {
     path: 'registration',
     loadChildren: () => import('./pages/registration/registration.module').then(m => m.RegistrationPageModule)
+  },
+  {
+    path: 'change-credentials',
+    children: [
+      {
+        path: ':changeId',
+        loadChildren: () => import('./pages/change-credentials/change-credentials.module').then( m => m.ChangeCredentialsPageModule)
+      }
+    ]
   }
 ];
 @NgModule({

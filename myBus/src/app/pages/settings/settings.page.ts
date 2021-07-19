@@ -51,6 +51,39 @@ export class SettingsPage implements OnInit{
     await actionSheet.present();
   }
 
+  async presentActionSheetChangeCred() {
+
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Choose your credentials',
+      cssClass: 'my-custom-class',
+      buttons: [{
+        text: 'Cambio Username',
+        role: 'destructive',
+        icon: 'flag',
+        handler: () => {
+          this.router.navigateByUrl('/change-credentials/change_username', { replaceUrl: true });
+        }
+      }, {
+        text: 'Cambio Email',
+        icon: 'flag',
+        handler: () => {
+          this.router.navigateByUrl('/change-credentials/change_email', { replaceUrl: true });
+        }
+      },
+        {
+          text: 'Cambio Password',
+          icon: 'flag',
+          handler: () => {
+            this.router.navigateByUrl('/change-credentials/reauth', { replaceUrl: true });
+          }
+        }]
+    });
+    await actionSheet.present();
+
+    const { role } = await actionSheet.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+  }
+
   signOut(){
     this.usersService.signOut().then(() => {
       this.router.navigateByUrl('/login', { replaceUrl: true })

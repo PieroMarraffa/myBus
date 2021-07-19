@@ -31,7 +31,7 @@ export class SettingsPage implements OnInit{
 
   async presentActionSheet() {
     const actionSheet = await this.actionSheetController.create({
-      header: 'Choose your language',
+      header: this.translateService.instant('Settings.Lingua'),
       cssClass: 'my-custom-class',
       buttons: [{
         text: 'Italiano',
@@ -54,41 +54,41 @@ export class SettingsPage implements OnInit{
   async presentActionSheetChangeCred() {
 
     const actionSheet = await this.actionSheetController.create({
-      header: 'Choose your credentials',
+      header: this.translateService.instant('CambioCredenziali.title'),
       cssClass: 'my-custom-class',
-      buttons: [{
-        text: 'Cambio Username',
-        role: 'destructive',
-        icon: 'flag',
-        handler: () => {
-          this.router.navigateByUrl('/change-credentials/change_username', { replaceUrl: true });
-        }
-      }, {
-        text: 'Cambio Email',
-        icon: 'flag',
+      buttons: [
+        {
+          text: this.translateService.instant('CambioCredenziali.Password'),
+          icon: 'pencil',
+          role: 'destructive',
+          handler: () => {
+            this.router.navigateByUrl('/change-credentials/reauth', { replaceUrl: true });
+          }
+        },
+        {
+        text: this.translateService.instant('CambioCredenziali.Email'),
+        icon: 'pencil',
         handler: () => {
           this.router.navigateByUrl('/change-credentials/change_email', { replaceUrl: true });
         }
       },
         {
-          text: 'Cambio Password',
-          icon: 'flag',
+          text: this.translateService.instant('CambioCredenziali.User'),
+          icon: 'pencil',
           handler: () => {
-            this.router.navigateByUrl('/change-credentials/reauth', { replaceUrl: true });
+            this.router.navigateByUrl('/change-credentials/change_username', { replaceUrl: true });
           }
         }]
     });
     await actionSheet.present();
 
     const { role } = await actionSheet.onDidDismiss();
-    console.log('onDidDismiss resolved with role', role);
   }
 
   signOut(){
     this.usersService.signOut().then(() => {
       this.router.navigateByUrl('/login', { replaceUrl: true })
     });
-    //this.navCotroller.navigateRoot('login');
   }
 
   select(lng){

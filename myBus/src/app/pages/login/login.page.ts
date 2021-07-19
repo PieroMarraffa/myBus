@@ -3,6 +3,7 @@ import {AlertController, LoadingController, NavController} from "@ionic/angular"
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {UsersService} from "../../services/users.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginPage implements OnInit {
               private alertController: AlertController,
               private loadingController: LoadingController,
               private usersService: UsersService,
-              private navController: NavController) { }
+              private navController: NavController,
+              private translateService: TranslateService) { }
 
   ngOnInit() {
     this.credentialForm = this.fb.group({
@@ -37,7 +39,7 @@ export class LoginPage implements OnInit {
     }, async err => {
       loading.dismiss();
       const alert = await this.alertController.create({
-        header: 'Login non effettuato',
+        header: this.translateService.instant('Login.Errore'),
         message: err.message,
         buttons: ['OK']
       });

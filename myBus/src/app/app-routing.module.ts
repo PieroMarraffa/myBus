@@ -86,7 +86,8 @@ const routes: Routes = [
     children: [
       {
         path: ':changeId',
-        loadChildren: () => import('./pages/change-credentials/change-credentials.module').then( m => m.ChangeCredentialsPageModule)
+        loadChildren: () => import('./pages/change-credentials/change-credentials.module').then( m => m.ChangeCredentialsPageModule),
+        ...canActivate(redirectUnauthorizedToLogin)
       }
     ]
   }

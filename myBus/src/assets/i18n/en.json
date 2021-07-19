@@ -4,5 +4,57 @@
     "logOut": "Log Out",
     "Credenziali": "Change Credentials",
     "Lingua": "Change Language"
+  },
+  "Account": {
+    "title" : "Account",
+    "prefe" : "Preferences",
+    "tick" : "Tickets"
+  },
+  "Tabs": {
+    "mappe": "Map",
+    "account": "Account",
+    "home": "Home",
+    "bus": "Bus List"
+  },
+  "CambioCredenziali": {
+    "title": "Change Credentials",
+    "User": "Change Username",
+    "Password":  "Change Password",
+    "Email": "Change Email",
+    "name": "Name",
+    "surname": "Surname",
+    "email": "New Email",
+    "password": "New Password",
+    "Riautenticati": "Riautenticate Yourself",
+    "confPassword": "Confirm Password"
+  },
+  "Login": {
+    "Registrati": "Registrate",
+    "Login": "Login",
+    "Email": "Insert Email",
+    "Password": "Insert Password",
+    "ConfermaPassword": "Confirm Password",
+    "Nome": "Name",
+    "Cognome": "Surname",
+    "Errore": "Couldn't Login",
+    "EmailNonValida": "Not Valid Email",
+    "EmailRichiesta": "Request Email"
+  },
+  "Registrati": {
+    "Nome": "Name",
+    "Cognome": "Surname",
+    "Email": "Email",
+    "EmailNonValida": "Not Valid Email",
+    "EmailRichiesta": "Request Email",
+    "PasswordRichiesta": "Request Password",
+    "Errore": "Password must have at least 6 character",
+    "ConfermaPassword": "Confirm Password",
+    "Registrati": "Registrate",
+    "Password": "Password",
+    "RegistrazioneNonEffettuata": "Cannot Registrate",
+    "PasswordNonCombacianti": "Different Passwords"
+  },
+  "Preferenze": {
+    "Manca": "You don't have added preferences"
   }
 }

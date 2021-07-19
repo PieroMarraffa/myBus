@@ -4,5 +4,60 @@
     "logOut": "Log Out",
     "Credenziali": "Cambia Credenziali",
     "Lingua": "Cambia Lingua"
+  },
+  "Account": {
+  "title" : "Account",
+  "prefe" : "Preferiti",
+  "tick" : "Biglietti"
+  },
+  "Tabs": {
+    "mappe": "Mappa",
+    "account": "Account",
+    "home": "Home",
+    "bus": "Autobus"
+  },
+  "Map": {
+    "title": "Mappa"
+  },
+  "CambioCredenziali": {
+    "title": "Cambia Credenziali",
+    "User": "Cambia Nome Utente",
+    "Password":  "Cambia Password",
+    "Email": "Cambia Email",
+    "name": "Nome",
+    "surname": "Cognome",
+    "email": "Nuova Email",
+    "password": "Nuova Password",
+    "Riautenticati": "Riautenticati",
+    "confPassword": "Conferma Password"
+  },
+  "Login": {
+    "Registrati": "Registrati",
+    "Login": "Login",
+    "Email": "Inserisci Email",
+    "Password": "Inserisci Password",
+    "ConfermaPassword": "Conferma Password",
+    "Nome": "Nome",
+    "Cognome": "Cognome",
+    "Errore": "Login non effettuato",
+    "EmailNonValida": "Email non Valida",
+    "EmailRichiesta": "Email Richiesta"
+  },
+  "Registrati": {
+    "Nome": "Nome",
+    "Cognome": "Cognome",
+    "Email": "Email",
+    "EmailNonValida": "Email non Valida",
+    "EmailRichiesta": "Email Richiesta",
+    "PasswordRichiesta": "Password Richiesta",
+    "Errore": "La password deve avere almeno 6 caratteri",
+    "Password": "Password",
+    "ConfermaPassword": "Conferma Password",
+    "Registrati": "Registrati",
+    "RegistrazioneNonEffettuata": "Registrazione non effettuata",
+    "PasswordNonCombacianti": "Passwords non combacianti!!"
+  },
+  "Preferenze": {
+    "Manca": "Non hai aggiunto Preferenze"
   }
 }

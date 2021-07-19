@@ -47,7 +47,6 @@ export class BusDetailPage implements OnInit {
       const busId = paramMap.get("busId");
       this.connectivityService.appIsOnline$.subscribe(online => {
 
-        console.log(online);
         if (online) {
           this.busListServices.getBus(busId).pipe(
             switchMap(bus => {

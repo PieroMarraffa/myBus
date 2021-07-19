@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Storage} from "@ionic/storage";
 import {StorageService} from "./storage.service";
 
-const PREFERENCE_KEY = 'PREFERENCE_ITEM';
+export const PREFERENCE_KEY = 'PREFERENCE_ITEM';
 
 @Injectable({
   providedIn: 'root'
@@ -18,13 +18,11 @@ export class PreferencesService {
       if (result) {
         if (!this.containsObject(bus, result)) {
           result.push(bus);
-          //return this.storage.set(PREFERENCE_KEY, result);
           return this.storageService.setData(PREFERENCE_KEY, result);
         } else {
           this.removeFromPreferences(bus);
         }
       } else {
-        //return this.storage.set(PREFERENCE_KEY, [bus]);
         return this.storageService.setData(PREFERENCE_KEY, [bus]);
       }
     });
@@ -35,17 +33,12 @@ export class PreferencesService {
       if (result){
         var busIndex = this.returnIndexOf(result, bus);
         result.splice(busIndex, 1);
-        //return this.storage.set(PREFERENCE_KEY, result);
         return this.storageService.setData(PREFERENCE_KEY, result);
       }
     });
   }
 
   removeAllPreferenceItems(){
-    /*return this.storage.remove(PREFERENCE_KEY).then(res => {
-      return res;
-    })
-     */
     return this.storageService.removeData(PREFERENCE_KEY).then(res => {
       return res;
     })

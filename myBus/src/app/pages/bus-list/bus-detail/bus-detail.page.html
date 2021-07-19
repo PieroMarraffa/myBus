@@ -4,7 +4,9 @@
       <ion-back-button defaultHref="/tabs/busList"></ion-back-button>
     </ion-buttons>
     <ion-title>{{ loadedBus$?.nome }}</ion-title>
-    <ion-button (click)="addToPreferences(loadedBus$)" slot="end" color="light"><ion-icon name="star-outline"></ion-icon></ion-button>
+    <ion-button (click)="addToPreferences(loadedBus$)" slot="end" color="light">
+      <ion-icon name="star-outline"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 

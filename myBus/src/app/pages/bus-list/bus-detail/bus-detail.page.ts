@@ -119,6 +119,4 @@ export class BusDetailPage implements OnInit {
     this.preferenceService.addToPreferences(bus);
     this.navController.navigateRoot('preferences');
   }
-
-
 }

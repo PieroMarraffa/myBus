@@ -133,7 +133,6 @@ export class MapPage implements OnInit {
 
   getStop(Stop){
     let bus_per_fermata= [];
-    console.log(this.busList);
     for( let b of this.busList){
       var key = (Object.keys(b.percorso) as Array<string>);
       for(let k of key){

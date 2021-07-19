@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {Platform} from "@ionic/angular";
+import {LanguageService} from "./services/language.service";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,13 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  constructor(private platform: Platform, private languageService: LanguageService) {
+    this.initialiazeApp();
+  }
+
+  initialiazeApp() {
+    this.platform.ready().then(() =>{
+      this.languageService.setInitialAppLanguage();
+    })
+  }
 }

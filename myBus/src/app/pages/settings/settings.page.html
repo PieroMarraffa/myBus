@@ -4,16 +4,22 @@
       <ion-back-button defaultHref="/tabs/account"></ion-back-button>
     </ion-buttons>
 
-    <ion-title slot="start"><b>Settings</b></ion-title>
+    <ion-title slot="start"><b>{{'Settings.title' | translate}}</b></ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-item>
     <ion-label>
+<<<<<<< Updated upstream
       <ion-button size='large' fill="outline" shape="round" expand="full" (click)="signOut()">Log Out</ion-button>
       <ion-button size='large'fill="outline" shape="round" expand="full">Cambia credenziali</ion-button>
       <ion-button size='large'fill="outline" shape="round" (click)="presentActionSheet()" expand="full">Selezona lingua</ion-button>
+=======
+      <ion-button size='large'fill="outline" shape="round" expand="full" (click)="signOut()">{{'Settings.logOut' | translate }}</ion-button>
+      <ion-button size='large'fill="outline" shape="round" expand="full">{{'Settings.Credenziali' | translate }}</ion-button>
+      <ion-button size='large'fill="outline" shape="round" expand="full" (click)="presentActionSheet()">{{'Settings.Lingua' | translate }}</ion-button>
+>>>>>>> Stashed changes
     </ion-label>
   </ion-item>
 </ion-content>

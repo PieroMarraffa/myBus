@@ -1,2 +1,11 @@
+.buttons ion-button{
+  width: 90%;
+  transition: 0.5s;
+  border-radius: 25px;
+}
 
+.buttons ion-button:hover{
+  background-color: #ff8d04;
+  color: white;
+}
 

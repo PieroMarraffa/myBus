@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { StopListService } from "../../services/stop-list.service";
-import {NavController, NavParams} from "@ionic/angular";
+import {LoadingController, NavController, NavParams} from "@ionic/angular";
 import { BusListService } from '../../services/bus-list.service';
 import {Bus} from "../../models/bus.model";
 import {BusListPage} from "../bus-list/bus-list.page";
@@ -32,7 +32,9 @@ export class MapPage implements OnInit {
               private stopListServices: StopListService,
               private busListServices:BusListService,
               public navCtrl: NavController,
-              private _ngZone:NgZone) {
+              private _ngZone:NgZone,
+              private loadingController: LoadingController,
+              ) {
 
 
   }
@@ -41,8 +43,10 @@ export class MapPage implements OnInit {
     this.busListServices.buses$.subscribe(bus => {this.busList = bus});
     this.stopListServices.stop$.subscribe(stop => {
     this.stopList = stop;
+
     this.loadMarker();
     this.loadMap();
+
 
   });
   }
@@ -73,9 +77,12 @@ export class MapPage implements OnInit {
       this.addInfoWindow(mapMarker);
     }
   }
-  loadMap(){
+  async loadMap(){
+    const loading = await this.loadingController.create();
+    await loading.present();
     this.geolocation.getCurrentPosition().then((resp) => {
     }).catch((error) => {
+      loading.dismiss();
       console.log('Error getting location', error);
     });
 
@@ -87,6 +94,7 @@ export class MapPage implements OnInit {
         center: this.mapCenter
       }
       this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapOptions);
+      loading.dismiss();
       this.addMarker();
 
     });
@@ -100,7 +108,7 @@ export class MapPage implements OnInit {
     if(fermata!=false) {
       let cont=0;
       for(let i of fermata){
-      let contentString = ('<ion-button href= "tabs/busList/' + fermata[cont].id+ '">' +
+      let contentString = ('<ion-button expand="block" size="large" href= "tabs/busList/' + fermata[cont].id+ '">' +
         '<h1 id="firstHeading" class="firstHeading">' + fermata[cont].nome + '</h1></ion-button>');
       box= box  + contentString;
       cont ++;
@@ -115,7 +123,7 @@ export class MapPage implements OnInit {
 
       marker.addListener('click',()=> {
           this.closeAllInfoWindow();
-          infowindow.setContent('<h1 align="center" id="firstHeading" class="firstHeading"><b>'+  marker.title +'</b></h1> \n' + box );
+          infowindow.setContent('<h1 align="center" id="firstHeading" class="firstHeading"><b>'+  marker.title +'</b></h1> \n <div >' + box +'</div>' );
           infowindow.open(this.map, marker);
 
 

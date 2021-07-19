@@ -59,17 +59,17 @@ export class ChangeCredentialsPage implements OnInit{
 
     if (this.changeId == 'change_username'){
       return this.userService.changeCredentials(this.changeCredentialsForm.get('name').value + ' ' + this.changeCredentialsForm.get('surname').value).then(() => {
-        this.navController.navigateRoot('account');
+        this.navController.navigateRoot('/tabs/account');
       });
     }
     if (this.changeId == 'change_email'){
       return this.userService.changeCredentials(null, this.changeCredentialsForm.get('email').value, null).then(() => {
-        this.navController.navigateRoot('account');
+        this.navController.navigateRoot('/tabs/account');
       });
     }
     if (this.changeId == 'change_password' && this.changeCredentialsForm.get('password').value == this.changeCredentialsForm.get('cpassword').value){
       return this.userService.changeCredentials(null, null, this.changeCredentialsForm.get('password').value).then(() => {
-        this.navController.navigateRoot('account');
+        this.navController.navigateRoot('/tabs/account');
       });
     }
     if (this.changeId == 'reauth'){

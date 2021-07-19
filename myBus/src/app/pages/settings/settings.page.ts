@@ -83,7 +83,6 @@ export class SettingsPage implements OnInit{
     await actionSheet.present();
 
     const { role } = await actionSheet.onDidDismiss();
-    console.log('onDidDismiss resolved with role', role);
   }
 
   signOut(){

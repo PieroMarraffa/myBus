@@ -18,8 +18,6 @@ export class BusListPage implements OnInit {
 
     this.connectivityService.appIsOnline$.subscribe(online => {
 
-      console.log(online);
-
       if (online){
         this.busListServices.buses$.subscribe(bus => {
           this.busList = bus;

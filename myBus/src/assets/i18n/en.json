@@ -25,7 +25,8 @@
     "surname": "Surname",
     "email": "New Email",
     "password": "New Password",
-    "Riautenticati": "Riautenticate Yourself"
+    "Riautenticati": "Riautenticate Yourself",
+    "confPassword": "Confirm Password"
   },
   "Login": {
     "Registrati": "Registrate",
@@ -52,5 +53,8 @@
     "Password": "Password",
     "RegistrazioneNonEffettuata": "Cannot Registrate",
     "PasswordNonCombacianti": "Different Passwords"
+  },
+  "Preferenze": {
+    "Manca": "You don't have added preferences"
   }
 }

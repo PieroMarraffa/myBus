@@ -82,7 +82,6 @@ export class ChangeCredentialsPage implements OnInit{
 
         this.navController.navigateRoot('/change-credentials/change_password');
       }).catch((error) => {
-        console.log('ngulo a mammeta');
         this.toast('Informazioni errate. Riprovare!!', 'danger');
       });
     }

@@ -26,7 +26,6 @@ export class UsersService {
   constructor(private afs:AngularFirestore,
               private afAuth: AngularFireAuth) {
     this.afAuth.onAuthStateChanged(user => {
-      console.log('Changed: ', user);
       this.currentUser = user;
     });
     this.user$ = this.afAuth.authState
@@ -94,7 +93,6 @@ export class UsersService {
         displayName: displayName,
       }).then(() => {
         this.afAuth.onAuthStateChanged(user => {
-          console.log('Changed: ', user);
           this.currentUser = user;
 
           var namSur = displayName.split(' ');
@@ -112,7 +110,6 @@ export class UsersService {
     if (email != null){
       user.updateEmail(email).then(() => {
         this.afAuth.onAuthStateChanged(user => {
-          console.log('Changed: ', user);
           this.currentUser = user;
 
           return this.afs.doc(`profiles/${user.uid}`).update({
@@ -127,7 +124,6 @@ export class UsersService {
     if (password != null){
       user.updatePassword(password).then(() => {
         this.afAuth.onAuthStateChanged(user => {
-          console.log('Changed: ', user);
           this.currentUser = user;
         })
       }).catch((error) => {

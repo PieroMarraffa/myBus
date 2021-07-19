@@ -7,6 +7,7 @@ import{AlertController} from "@ionic/angular";
   styleUrls: ['./tickets.page.scss'],
 })
 export class TicketsPage {
+  result: string;
   paymentAmount: string = '1.20';
   currency: string = 'EUR';
   currencyIcon: string = '€';
@@ -28,23 +29,17 @@ export class TicketsPage {
 
         // Finalize the transaction
 
-        onApprove: function (data, actions) {
-          return actions.order.capture().then(function (details) {
+        onApprove: (data, actions) => {
+          actions.order.capture().then((details) => {
               // Show a success message to the buyer
               console.log(details);
-            var result           = '';
-            var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            var charactersLength = characters.length;
-            for ( var i = 0; i < 10; i++ ) {
-              result += characters.charAt(Math.floor(Math.random() *
-                charactersLength));}
-              alert("questo è il codice: "+ result);
-
+            this.presentAlertConfirm();
             })
 
             .catch(err => {
               console.log(err);
             })
+
         }
       }).render('#paypal-button-container');
     }, 500)
@@ -53,11 +48,10 @@ export class TicketsPage {
   }
 
   generateCode() {
-    let lenght=10;
     var result           = '';
     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
+    for ( var i = 0; i < 10; i++ ) {
       result += characters.charAt(Math.floor(Math.random() *
         charactersLength));
     }
@@ -67,8 +61,8 @@ export class TicketsPage {
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
       header: "Ticket's code" ,
-      message: 'Transaction completed by ' + 'details.payer.name.given_name' + '! \n'
-      + 'il tuo codice è: '+ this.generateCode(),
+      message: 'Transazione completata ! \n'
+      + 'Il tuo codice è: '+ this.generateCode(),
       buttons: [
          {
           text: 'Okay',
@@ -81,20 +75,7 @@ export class TicketsPage {
 
     await alert.present();
   }
-  async presentAlert(result) {
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Alert',
-      subHeader: 'Subtitle',
-      message: 'This is an alert message.' + result,
-      buttons: ['OK']
-    });
 
-    await alert.present();
-
-    const { role } = await alert.onDidDismiss();
-    console.log('onDidDismiss resolved with role', role);
-  }
 
 
 }

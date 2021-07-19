@@ -122,7 +122,6 @@ export class MapPage implements OnInit {
         })
 
       this.infoWindow.push(infowindow);
-      console.log(this.infoWindow);
     }
   }
   closeAllInfoWindow(){

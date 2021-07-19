@@ -11,9 +11,11 @@
 <ion-content>
   <ion-item>
     <ion-label>
+      <div class="buttons">
       <ion-button size='large' fill="outline" shape="round" expand="full" (click)="signOut()">Log Out</ion-button>
       <ion-button size='large' fill="outline" shape="round" expand="full" (click)="presentActionSheetChangeCred()">Cambia credenziali</ion-button>
-      <ion-button size='large' fill="outline" shape="round" (click)="presentActionSheetLan()" expand="full">Seleziona lingua</ion-button>
+      <ion-button size='large' fill="outline" shape="round" (click)="presentActionSheet()" expand="full">Seleziona lingua</ion-button>
+      </div>
     </ion-label>
   </ion-item>
 </ion-content>

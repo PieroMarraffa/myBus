@@ -10,8 +10,8 @@
 <ion-content>
   <div class="box">
     <div class="icon-box">
-      <ion-icon name="person" id="profile-icon"></ion-icon>
-      <ion-button fill="clear" id="change-photo" color="dark">
+      <ion-label id="profile-icon">{{profileImg}}</ion-label>
+      <ion-button fill="clear" id="change-photo" color="dark" (click)="presentAlertRadio()">
         <ion-icon name="pencil-outline"></ion-icon>
       </ion-button>
     </div>

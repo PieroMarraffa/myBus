@@ -5,6 +5,7 @@ import {UsersService} from "../../services/users.service";
 import {NavController, ToastController, ViewWillEnter} from "@ionic/angular";
 import firebase from "firebase";
 import AuthCredential = firebase.auth.AuthCredential;
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-change-credentials',
@@ -21,7 +22,8 @@ export class ChangeCredentialsPage implements OnInit{
               private fb: FormBuilder,
               private userService: UsersService,
               private navController: NavController,
-              private  toaster: ToastController) { }
+              private  toaster: ToastController,
+              private translateService: TranslateService) { }
 
   ngOnInit() {
 
@@ -60,19 +62,19 @@ export class ChangeCredentialsPage implements OnInit{
     if (this.changeId == 'change_username'){
       return this.userService.changeCredentials(this.changeCredentialsForm.get('name').value + ' ' + this.changeCredentialsForm.get('surname').value).then(() => {
         this.navController.navigateRoot('/tabs/account');
-        this.toast('Username modificato con successo!!', '');
+        this.toast(this.translateService.instant("CambioCredenziali.toastName"), '');
       });
     }
     if (this.changeId == 'change_email'){
       return this.userService.changeCredentials(null, this.changeCredentialsForm.get('email').value, null).then(() => {
         this.navController.navigateRoot('/tabs/account');
-        this.toast('Email modificata con successo!!', '');
+        this.toast(this.translateService.instant("CambioCredenziali.toastEmail"), '');
       });
     }
     if (this.changeId == 'change_password' && this.changeCredentialsForm.get('password').value == this.changeCredentialsForm.get('cpassword').value){
       return this.userService.changeCredentials(null, null, this.changeCredentialsForm.get('password').value).then(() => {
         this.navController.navigateRoot('/tabs/account');
-        this.toast('Password modificata con successo!!', '');
+        this.toast(this.translateService.instant("CambioCredenziali.toastPassword"), '');
       });
     }
     if (this.changeId == 'reauth'){
@@ -85,7 +87,7 @@ export class ChangeCredentialsPage implements OnInit{
 
         this.navController.navigateRoot('/change-credentials/change_password');
       }).catch((error) => {
-        this.toast('Informazioni errate. Riprovare!!', 'danger');
+        this.toast(this.translateService.instant("CambioCredenziali.toastErrore"), 'danger');
       });
     }
   }

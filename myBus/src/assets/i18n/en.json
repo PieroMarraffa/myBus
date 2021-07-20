@@ -26,7 +26,11 @@
     "email": "New Email",
     "password": "New Password",
     "Riautenticati": "Riautenticate Yourself",
-    "confPassword": "Confirm Password"
+    "confPassword": "Confirm Password",
+    "toastName": "Username succesfully mopdified!!",
+    "toastEmail": "Email succesfully mopdified!!",
+    "toastPassword": "Password succesfully mopdified!!",
+    "toastErrore": "Wrong Informations. Retry!!"
   },
   "Login": {
     "Registrati": "Registrate",

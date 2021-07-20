@@ -29,7 +29,11 @@
     "email": "Nuova Email",
     "password": "Nuova Password",
     "Riautenticati": "Riautenticati",
-    "confPassword": "Conferma Password"
+    "confPassword": "Conferma Password",
+    "toastName": "Username modificato con successo!!",
+    "toastEmail": "Email modificata con successo!!",
+    "toastPassword": "Password modificata con successo!!",
+    "toastErrore": "Informazioni errate. Riprovare!!"
   },
   "Login": {
     "Registrati": "Registrati",
